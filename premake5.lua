@@ -132,7 +132,8 @@ project "Editor"
 	}
 	postbuildcommands
 	{
-		("{COPY} ../dependencies/glfw/glfw3.dll ../bin/" .. output_dir .. "/%{prj.name}")
+		("{COPY} ../dependencies/glfw/glfw3.dll ../bin/" .. output_dir .. "/%{prj.name}"),
+		("{COPY} ../Editor/asset ../bin/" .. output_dir .. "/%{prj.name}/asset/")
 	}
 
 

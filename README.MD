@@ -13,3 +13,4 @@ viewport是主要视图窗口。debug panel没啥用，目前只能看游戏运�
 有很多代码是为了实现跨平台写的，主要负责渲染的代码在Tengine\src\renderers.cpp，负责控制场景的代码在Tengine\src\scenes.cpp和Tengine\include\scene\，负责事件管理的代码在Tengine\include\event\。
 本程序使用的三方库：GLAD，GLM，IMGUI，YAML，ENTT，GLFW。
 光线的计算非常简单，完全在CPU上完成，不会被物体挡住。
+请确保asset文件夹的存在和完整，如果出现错误，请手动复制Editor\asset\到.exe所在的文件夹。
