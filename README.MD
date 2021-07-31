@@ -12,3 +12,4 @@ viewport是主要视图窗口。debug panel没啥用，目前只能看游戏运�
 灯光现在只能影响到3D物体，即mesh。2D的sprite不会受光的影响，即使关掉环境光，2Dsprite依旧照常显示。
 有很多代码是为了实现跨平台写的，主要负责渲染的代码在Tengine\src\renderers.cpp，负责控制场景的代码在Tengine\src\scenes.cpp和Tengine\include\scene\，负责事件管理的代码在Tengine\include\event\。
 本程序使用的三方库：GLAD，GLM，IMGUI，YAML，ENTT，GLFW。
+光线的计算非常简单，完全在CPU上完成，不会被物体挡住。
