@@ -1,0 +1,107 @@
+scene: untitled
+entity:
+  - entity: 2
+    tag component:
+      tag: default tag
+      name: default name
+      ID: 2
+      significance: true
+    transform component:
+      translate: [5, 0, 0]
+      scale: [1, 1, 1]
+      rotation: [0, 0, 0]
+      subject to: 4294967295
+    light component:
+      intensity: 1000
+      color: [1, 1, 1]
+      direction: [0, 0, 0]
+  - entity: 1
+    tag component:
+      tag: default tag
+      name: default name
+      ID: 0
+      significance: true
+    transform component:
+      translate: [5, 0, 0]
+      scale: [1, 1, 1]
+      rotation: [0, -275, 0]
+      subject to: 4294967295
+    camera component:
+      camera type: 1
+      perspective FOV: 45
+      perspective near: 0.00999999978
+      perspective far: 1000
+      orthographic size: 10
+      orthographic near: -1
+      orthographic far: 1
+      aspect ratio: 0.855855882
+      is primary: true
+      is fixed ratio: false
+  - entity: 1048576
+    tag component:
+      tag: default tag
+      name: default name
+      ID: 1
+      significance: true
+    transform component:
+      translate: [0, 0, 0]
+      scale: [1, 1, 0.5]
+      rotation: [0, 0, 0]
+      subject to: 4294967295
+    mesh component:
+      points:
+        - position: [0, 2, 0]
+          texcoord: [0, 0]
+        - position: [0, -2, 0]
+          texcoord: [0, 0]
+        - position: [1, 0, 0]
+          texcoord: [0, 0]
+        - position: [0, 0, 1]
+          texcoord: [0, 0]
+        - position: [-1, 0, 0]
+          texcoord: [0, 0]
+        - position: [0, 0, -1]
+          texcoord: [0, 0]
+      faces:
+        - color: [1, 0.392156869, 0, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 0
+          p2: 2
+          p3: 3
+        - color: [1, 1, 0.392156869, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 0
+          p2: 3
+          p3: 4
+        - color: [0.392156869, 0, 1, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 0
+          p2: 4
+          p3: 5
+        - color: [0, 1, 0.392156869, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 0
+          p2: 5
+          p3: 2
+        - color: [1, 0, 0, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 1
+          p2: 3
+          p3: 2
+        - color: [1, 1, 0, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 1
+          p2: 4
+          p3: 3
+        - color: [0, 0, 1, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 1
+          p2: 5
+          p3: 4
+        - color: [0, 1, 0, 0.392156869]
+          texture: asset/pic/white.png
+          p1: 1
+          p2: 2
+          p3: 5
+entity count: 3
+environment light: false

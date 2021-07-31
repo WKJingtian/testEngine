@@ -1,0 +1,24 @@
+scene: untitled
+entity:
+  - entity: 0
+    tag component:
+      tag: default tag
+      name: default name
+      ID: 0
+      significance: true
+    transform component:
+      translate: [-0.069038488, 0, -0.123497292]
+      scale: [1, 1, 1]
+      rotation: [0, 0, 0]
+      subject to: 4294967295
+    camera component:
+      camera type: 0
+      perspective FOV: 45
+      perspective near: 0.00999999978
+      perspective far: 1000
+      orthographic size: 10
+      orthographic near: -1
+      orthographic far: 1
+      aspect ratio: 0.785285294
+      is primary: true
+      is fixed ratio: false
