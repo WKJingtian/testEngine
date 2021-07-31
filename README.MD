@@ -1,4 +1,5 @@
-请运行 bin\Release-windows-x86_64\Editor\Editor.exe
+请使用Visual studio 2019进行编译
+之后运行 bin\Release-windows-x86_64\Editor\Editor.exe
 或者 bin\Debug-windows-x86_64\Editor\Editor.exe
 
 第一次运行IMGUI的窗口可能都比较小，请手动拉大。
