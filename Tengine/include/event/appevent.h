@@ -3,7 +3,7 @@
 
 namespace tengine
 {
-	class T_API windowCloseEvent : public t_event
+	class windowCloseEvent : public t_event
 	{
 	public:
 		windowCloseEvent() {}
@@ -11,7 +11,7 @@ namespace tengine
 		EVENT_CLASS_TYPE(windowClose)
 	};
 
-	class T_API windowResizeEvent : public t_event
+	class windowResizeEvent : public t_event
 	{
 	public:
 		windowResizeEvent(int w, int h)
@@ -27,7 +27,7 @@ namespace tengine
 		unsigned int width, height;
 	};
 
-	class T_API appTickEvent : public t_event
+	class appTickEvent : public t_event
 	{
 	public:
 		appTickEvent() {}
@@ -35,7 +35,7 @@ namespace tengine
 		EVENT_CLASS_TYPE(appTick)
 	};
 
-	class T_API appUpdateEvent : public t_event
+	class appUpdateEvent : public t_event
 	{
 	public:
 		appUpdateEvent() {}
@@ -43,7 +43,7 @@ namespace tengine
 		EVENT_CLASS_TYPE(appUpdate)
 	};
 
-	class T_API appRenderEvent : public t_event
+	class appRenderEvent : public t_event
 	{
 	public:
 		appRenderEvent() {}

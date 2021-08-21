@@ -3,7 +3,7 @@
 
 namespace tengine
 {
-	class T_API mouseMoveEvent : public t_event
+	class mouseMoveEvent : public t_event
 	{
 	public:
 		mouseMoveEvent(float x, float y)
@@ -22,7 +22,7 @@ namespace tengine
 		float mousex, mousey;
 	};
 
-	class T_API mouseScrollEvent : public t_event
+	class mouseScrollEvent : public t_event
 	{
 	public:
 		mouseScrollEvent(float x, float y)
@@ -41,7 +41,7 @@ namespace tengine
 		float xoffset, yoffset;
 	};
 
-	class T_API buttonEvent : public t_event
+	class buttonEvent : public t_event
 	{
 	public:
 		inline int getButton() const { return button; }
@@ -51,7 +51,7 @@ namespace tengine
 		int button;
 	};
 
-	class T_API buttonPressedEvent : public buttonEvent
+	class buttonPressedEvent : public buttonEvent
 	{
 	public:
 		buttonPressedEvent(int b) : buttonEvent(b) {}
@@ -64,7 +64,7 @@ namespace tengine
 		EVENT_CLASS_TYPE(mousePressed)
 	};
 
-	class T_API buttonReleasedEvent : public buttonEvent
+	class buttonReleasedEvent : public buttonEvent
 	{
 	public:
 		buttonReleasedEvent(int b) : buttonEvent(b) {}

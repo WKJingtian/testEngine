@@ -1,9 +1,11 @@
 #pragma once
-#include "entt.h"
+#include "entt/entt.hpp"
 #include "glm/glm.hpp"
-#include "graphic/camera.h"
-#include "renderer/renderall.h"
 #include "glm/ext/matrix_transform.hpp"
+#include "tengine_core.h"
+#include "renderer/renderall.h"
+#include "graphic/graphicall.h"
+#include "input.h"
 
 namespace tengine
 {
@@ -178,7 +180,7 @@ namespace tengine
 		void rmPoint(int which)
 		{
 			mesh.erase(std::next(mesh.begin(), which));
-			int ind = 0;
+			unsigned int ind = 0;
 			while (ind < faces.size())
 			{
 				faceInfo face = faces.at(ind);
@@ -243,4 +245,5 @@ namespace tengine
 		particleComponent2D() = default;
 		particleComponent2D(const particleComponent2D&) = default;
 	};
+
 }

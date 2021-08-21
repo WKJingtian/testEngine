@@ -9,130 +9,130 @@
 namespace tengine
 {
 	static bool GLFW_initialized = false;
-	t_window* t_window::create(const windowProp& props) { return new winWindow(props); }
+//	t_window* t_window::create(const windowProp& props) { return new winWindow(props); }
 
 	void glfwErrorCallback(int e, const char* msg) { log(msg, 4); }
-	winWindow::winWindow(const windowProp& p) { init(p); }
-	winWindow::~winWindow() { shutdown(); }
-	void winWindow::init(const windowProp& p)
-	{
-		prop.title = p.title; prop.width = p.width; prop.height = p.height;
-		if (!GLFW_initialized)
-		{
-			glfwSetErrorCallback(glfwErrorCallback);
-			if (glfwInit())
-				log("glfw starts successfully", 0);
-			else
-			{
-				log("glfw initialization failed", 3);
-				glfwTerminate();
-				exit(EXIT_FAILURE);
-			}
-			GLFW_initialized = true;
-		}
-		win = glfwCreateWindow((int)prop.width, (int)prop.height, prop.title.c_str(), NULL, NULL);
-		context = new openglContext(win);
-		context->init();
-
-		glfwSetWindowUserPointer(win, &prop);
-		setVSync(true);
-
-		glfwSetWindowSizeCallback(win, [](GLFWwindow* window, int width, int height)
-			{
-				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
-				w->height = height;
-				w->width = width;
-				windowResizeEvent eve(width, height);
-				w->eventCallback(eve);
-			});
-		glfwSetWindowCloseCallback(win, [](GLFWwindow* window)
-			{
-				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
-				windowCloseEvent eve;
-				w->eventCallback(eve);
-			});
-		glfwSetCharCallback(win, [](GLFWwindow* window, unsigned int character)
-			{
-				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
-				keyTypedEvent eve(character);
-				w->eventCallback(eve);
-			});
-		glfwSetKeyCallback(win, [](GLFWwindow* window, int key, int scancode, int action, int mods)
-			{
-				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
-				switch (action)
-				{
-					case GLFW_PRESS:
-					{
-						keyPressedEvent eve(key, 0);
-						w->eventCallback(eve);
-						break;
-					}
-					case GLFW_RELEASE:
-					{
-						keyReleasedEvent eve(key);
-						w->eventCallback(eve);
-						break;
-					}
-					case GLFW_REPEAT:
-					{
-						keyPressedEvent eve(key, 1);
-						w->eventCallback(eve);
-						break;
-					}
-				}
-			});
-		glfwSetMouseButtonCallback(win, [](GLFWwindow* window, int button, int action, int mods)
-			{
-				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
-				switch (action)
-				{
-					case GLFW_PRESS:
-					{
-						buttonPressedEvent eve(button);
-						w->eventCallback(eve);
-						break;
-					}
-					case GLFW_RELEASE:
-					{
-						buttonReleasedEvent eve(button);
-						w->eventCallback(eve);
-						break;
-					}
-					case GLFW_REPEAT:
-					{
-						buttonPressedEvent eve(button);
-						w->eventCallback(eve);
-						break;
-					}
-				}
-			});
-		glfwSetScrollCallback(win, [](GLFWwindow* window, double xOffset, double yOffset)
-			{
-				win_data * w = (win_data*)glfwGetWindowUserPointer(window);
-				mouseScrollEvent eve((float)xOffset, (float)yOffset);
-				w->eventCallback(eve);
-			});
-		glfwSetCursorPosCallback(win, [](GLFWwindow* window, double xPos, double yPos)
-			{
-				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
-				mouseMoveEvent eve((float)xPos, (float)yPos);
-				w->eventCallback(eve);
-			});
-	}
-	void winWindow::shutdown() { glfwDestroyWindow(win); }
-	void winWindow::onUpdate()
-	{
-		glfwPollEvents();
-		context->swapBuffers();
-	}
-	void winWindow::setVSync(bool enable)
-	{
-		if (enable) glfwSwapInterval(1);
-		else glfwSwapInterval(0);
-		prop.VSync = enable;
-	}
-	bool winWindow::isVSync() const { return prop.VSync; }
+//	winWindow::winWindow(const windowProp& p) { init(p); }
+//	winWindow::~winWindow() { shutdown(); }
+//	void winWindow::init(const windowProp& p)
+//	{
+//		prop.title = p.title; prop.width = p.width; prop.height = p.height;
+//		if (!GLFW_initialized)
+//		{
+//			glfwSetErrorCallback(glfwErrorCallback);
+//			if (glfwInit())
+//				log("glfw starts successfully", 0);
+//			else
+//			{
+//				log("glfw initialization failed", 3);
+//				glfwTerminate();
+//				exit(EXIT_FAILURE);
+//			}
+//			GLFW_initialized = true;
+//		}
+//		win = glfwCreateWindow((int)prop.width, (int)prop.height, prop.title.c_str(), NULL, NULL);
+//		context = new openglContext(win);
+//		context->init();
+//
+//		glfwSetWindowUserPointer(win, &prop);
+//		setVSync(true);
+//
+//		glfwSetWindowSizeCallback(win, [](GLFWwindow* window, int width, int height)
+//			{
+//				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
+//				w->height = height;
+//				w->width = width;
+//				windowResizeEvent eve(width, height);
+//				w->eventCallback(eve);
+//			});
+//		glfwSetWindowCloseCallback(win, [](GLFWwindow* window)
+//			{
+//				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
+//				windowCloseEvent eve;
+//				w->eventCallback(eve);
+//			});
+//		glfwSetCharCallback(win, [](GLFWwindow* window, unsigned int character)
+//			{
+//				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
+//				keyTypedEvent eve(character);
+//				w->eventCallback(eve);
+//			});
+//		glfwSetKeyCallback(win, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+//			{
+//				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
+//				switch (action)
+//				{
+//					case GLFW_PRESS:
+//					{
+//						keyPressedEvent eve(key, 0);
+//						w->eventCallback(eve);
+//						break;
+//					}
+//					case GLFW_RELEASE:
+//					{
+//						keyReleasedEvent eve(key);
+//						w->eventCallback(eve);
+//						break;
+//					}
+//					case GLFW_REPEAT:
+//					{
+//						keyPressedEvent eve(key, 1);
+//						w->eventCallback(eve);
+//						break;
+//					}
+//				}
+//			});
+//		glfwSetMouseButtonCallback(win, [](GLFWwindow* window, int button, int action, int mods)
+//			{
+//				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
+//				switch (action)
+//				{
+//					case GLFW_PRESS:
+//					{
+//						buttonPressedEvent eve(button);
+//						w->eventCallback(eve);
+//						break;
+//					}
+//					case GLFW_RELEASE:
+//					{
+//						buttonReleasedEvent eve(button);
+//						w->eventCallback(eve);
+//						break;
+//					}
+//					case GLFW_REPEAT:
+//					{
+//						buttonPressedEvent eve(button);
+//						w->eventCallback(eve);
+//						break;
+//					}
+//				}
+//			});
+//		glfwSetScrollCallback(win, [](GLFWwindow* window, double xOffset, double yOffset)
+//			{
+//				win_data * w = (win_data*)glfwGetWindowUserPointer(window);
+//				mouseScrollEvent eve((float)xOffset, (float)yOffset);
+//				w->eventCallback(eve);
+//			});
+//		glfwSetCursorPosCallback(win, [](GLFWwindow* window, double xPos, double yPos)
+//			{
+//				win_data* w = (win_data*)glfwGetWindowUserPointer(window);
+//				mouseMoveEvent eve((float)xPos, (float)yPos);
+//				w->eventCallback(eve);
+//			});
+//	}
+//	void winWindow::shutdown() { glfwDestroyWindow(win); }
+//	void winWindow::onUpdate()
+//	{
+//		glfwPollEvents();
+//		context->swapBuffers();
+//	}
+//	void winWindow::setVSync(bool enable)
+//	{
+//		if (enable) glfwSwapInterval(1);
+//		else glfwSwapInterval(0);
+//		prop.VSync = enable;
+//	}
+//	bool winWindow::isVSync() const { return prop.VSync; }
 
 	// camera
 	void sceneCamera::setOrthographic(float size, float n, float f)
@@ -159,6 +159,11 @@ namespace tengine
 	void sceneCamera::recalculate()
 	{
 		//projection = glm::ortho(-r * z, r * z, -z, z, -1.0f, 1.0f);
+		if (aspectRatio == 0)
+		{
+			log("invalid aspect ratio detected (0)", 2);
+			return;
+		}
 		if (type == camType::orthographic)
 		{
 			float left = -aspectRatio * orthographicSize * 0.5f;

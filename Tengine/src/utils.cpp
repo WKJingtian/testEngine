@@ -1,5 +1,6 @@
 #include "tpch.h"
 #include "util/utilall.h"
+#include <windows.h>
 
 namespace tengine
 {

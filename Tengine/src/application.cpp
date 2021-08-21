@@ -1,5 +1,6 @@
 #include "tpch.h"
 #include "application.h"
+#include "editor2d.h"
 
 namespace tengine
 {
@@ -15,18 +16,77 @@ namespace tengine
 			log("multiple applications generated!", 3);
 			exit(EXIT_FAILURE);
 		}
-		win.reset(t_window::create());
-		win->setEventCallback(BIND_EVENT(application::onEvent));
 
-		renderer::init();
+		// Setup window
+		glfwSetErrorCallback(glfw_error_callback);
+		if (!glfwInit()) errout("glfw start failed, exit...");
+		// Create window with graphics context
+		glfwWindow = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
+		if (glfwWindow == NULL) errout("glfw window start failed, exit...");
 
+		bgfx::renderFrame(); // single threaded mode
+
+#if BX_PLATFORM_LINUX || BX_PLATFORM_BSD
+		bgfxInit.platformData.ndt = glfwGetX11Display();
+		bgfxInit.platformData.nwh = (void*)(uintptr_t)glfwGetX11Window(window);
+#elif BX_PLATFORM_OSX
+		bgfxInit.platformData.nwh = glfwGetCocoaWindow(window);
+#elif BX_PLATFORM_WINDOWS
+		bgfxInit.platformData.nwh = glfwGetWin32Window(glfwWindow);
+#endif
+		glfwGetWindowSize(glfwWindow, &width, &height);
+		bgfxInit.type = bgfx::RendererType::Count; // auto choose renderer
+		bgfxInit.resolution.width = width;
+		bgfxInit.resolution.height = height;
+		bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
+		bgfx::init(bgfxInit);
+		
+		bgfx::setViewClear(
+			0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x112233FF, 1.0f, 0);
+		bgfx::setViewRect(0, 0, 0, width, height);
+
+		log("making layers...");
 		guiLayer = new imguiLayer();
 		pushOverlay(guiLayer);
+		pushLayer(new editor2d());
 		running = true;
+		log("layer added!");
+
+		bgfx::VertexLayout layout = bgfx::VertexLayout();
+		layout
+			.begin()
+			.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+			.end();
+		bgfxVertexBuffer = bgfx::createVertexBuffer(
+			bgfx::makeRef(vertexes, 1024),
+			layout);
+		bgfxIndexBuffer = bgfx::createIndexBuffer(
+			bgfx::makeRef(indexes, 4096));
+
+		std::string vshader;
+		if (!read_file("./asset/shader/bgfxVertex.bin", vshader))
+			errout("vertex shader compile failed");
+
+		std::string fshader;
+		if (!read_file("./asset/shader/bgfxFrag.bin", fshader))
+			errout("fragment shader compile failed");
+
+		bgfx::ShaderHandle vShader = createShader(vshader, "bgfx vertex shader");
+		bgfx::ShaderHandle fShader = createShader(fshader, "bgfx fragment shader");
+
+		program = bgfx::createProgram(vShader, fShader, true);
 	}
 
-	application::~application() {}
-	
+	application::~application()
+	{
+		bgfx::destroy(bgfxVertexBuffer);
+		bgfx::destroy(bgfxIndexBuffer);
+		bgfx::destroy(program);
+		ImGui::DestroyContext();
+		bgfx::shutdown();
+	}
+
 	void application::onEvent(t_event& e)
 	{
 		t_dispatcher disp(e);
@@ -55,15 +115,30 @@ namespace tengine
 	void application::run()
 	{
 		ts.init();
+		bool swi = false;
 		while (running)
 		{
-			if (!minimize)
-				for (t_layer* l : ls) l->onUpdate(deltaTime);
+			glfwPollEvents();
+
+			// report how long this frame take
+			deltaTime = (float)ts.reportDelta();
+			//log("running...")
+			
+			// render graphic and gui
+			for (t_layer* l : ls) l->onUpdate(deltaTime);
 			guiLayer->begin();
 			for (t_layer* l : ls) l->guiRender();
 			guiLayer->end();
-			win->onUpdate();
-			deltaTime = (float)ts.reportDelta();
+
+			bgfx::setVertexBuffer(0, bgfxVertexBuffer);
+			bgfx::setIndexBuffer(bgfxIndexBuffer);
+			bgfx::submit(0, program);
+			bgfx::frame();
+			if (input::isButtonPressed(0))
+			{
+				log("switch mode...");
+				swi = !swi;
+			}
 		}
 	}
 

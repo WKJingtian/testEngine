@@ -1,7 +1,7 @@
 #include "tpch.h"
 #include "shader/shaderall.h"
 #include "util/utillog.h"
-#include "glm/glm/gtc/type_ptr.hpp"
+#include "glm/gtc/type_ptr.hpp"
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
 #include "renderer/renderer.h"

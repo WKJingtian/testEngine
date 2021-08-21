@@ -5,8 +5,10 @@
 #include "glm/ext.hpp"
 #include "glm/gtx/string_cast.hpp"
 #include "util/utilall.h"
-#include "stbImage.h"
 #include <vector>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 namespace tengine
 {
@@ -204,8 +206,8 @@ namespace tengine
 		{
 		case API::None: log("giving unsupported renderer API, exit...", 3); exit(EXIT_FAILURE);
 		case API::opengl:
-			std::dynamic_pointer_cast<openglShader>(s)->setUnimat4("uViewProject", c.viewProject);
-			std::dynamic_pointer_cast<openglShader>(s)->setUnimat4("uTransform", transform);
+			s->setUnimat4("uViewProject", c.viewProject);
+			s->setUnimat4("uTransform", transform);
 			break;
 		default: log("directx and vulkan is not supported yet, exit...", 3); exit(EXIT_FAILURE);
 		}

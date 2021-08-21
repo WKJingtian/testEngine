@@ -5,7 +5,3 @@
 
 using namespace std;
 using namespace tengine;
-int main()
-{
-
-}

@@ -8,7 +8,7 @@
 
 namespace tengine
 {
-	struct T_API mat4
+	struct mat4
 	{
 		float element[16]; // 4*4
 		mat4();

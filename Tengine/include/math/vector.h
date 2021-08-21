@@ -4,7 +4,7 @@
 
 namespace tengine
 {
-	struct T_API vec2
+	struct vec2
 	{
 		const char* name;
 		float a, b;
@@ -23,7 +23,7 @@ namespace tengine
 	vec2 operator/(vec2 left, const vec2& right);
 	std::ostream& operator<< (std::ostream& ost, const vec2& target);
 
-	struct T_API vec3
+	struct vec3
 	{
 		const char* name;
 		float a, b, c;
@@ -42,7 +42,7 @@ namespace tengine
 	vec3 operator/(vec3 left, const vec3& right);
 	std::ostream& operator<< (std::ostream& ost, const vec3& target);
 
-	struct T_API vec4
+	struct vec4
 	{
 		const char* name;
 		float a, b, c, d;

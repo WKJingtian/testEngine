@@ -1,5 +1,6 @@
 #pragma once
 #include "scene.h"
+#include "component.h"
 #include "util/utilall.h"
 #include "input.h"
 
@@ -63,7 +64,7 @@ namespace tengine
 			transformComponent comp = getComponent<transformComponent>();
 			entity e = entity((entt::entity)(sce->IDconverter(comp.subjectTo)), sce);
 
-			if (!e || e==*this)
+			if (!e || e == *this)
 				return glm::translate(glm::mat4(1), comp.translate) *
 				glm::scale(glm::mat4(1), comp.scale) *
 				glm::rotate(glm::mat4(1), glm::radians(comp.rotation[0]), glm::vec3(1, 0, 0)) *
@@ -163,7 +164,7 @@ namespace tengine
 		}
 		virtual void onDestroy() override
 		{
-			
+
 		}
 	};
 
@@ -231,15 +232,15 @@ namespace tengine
 				particleComponent2D& c2 = e->addComponent<particleComponent2D>();
 				transformComponent& c3 = e->getComponent<transformComponent>();
 				tagComponent& c4 = e->getComponent<tagComponent>();
-				
+
 				c1.color = colorBegin;
 				c1.texPath = texPath;
-				
+
 				c2.lifetime = lifetime;
 				c2.movSpeed = glm::vec2(velocity.x + (velocityVariation.x * getRand()),
 					velocity.y + (velocityVariation.y * getRand()));
 				c2.rotSpeed = rotSpeed * getRand();
-				
+
 				c3.translate = ent->getComponent<transformComponent>().translate;
 				c3.rotation = glm::vec3(0);
 				c3.scale = glm::vec3(sizeBegin, 1);

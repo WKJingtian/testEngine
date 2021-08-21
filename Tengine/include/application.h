@@ -6,8 +6,30 @@
 #include "renderer/renderall.h"
 #include "util/utilall.h"
 
+#include "bgfxImgui.h"
+#include "sdlImgui.h"
+#include "bgfx/bgfx.h"
+#include "bgfx/platform.h"
+#include "bx/math.h"
+#include "imgui.h"
+#include "bgfxDraw.h"
+#include "imgui.h"
+
+#include <stdio.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#define GLFW_EXPOSE_NATIVE_WGL
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include "GLFW/glfw3native.h"
+
+
 namespace tengine
 {
+	static void glfw_error_callback(int error, const char* description)
+	{
+		fprintf(stderr, "Glfw Error %d: %s\n", error, description);
+	}
+
 	class application
 	{
 	public:
@@ -19,7 +41,7 @@ namespace tengine
 		void pushOverlay(t_layer* l);
 		static inline application& getApp() { return *app_instance; }
 		static inline float getDelta() { return deltaTime; }
-		inline t_window& getwin() { return *win; }
+		inline t_window& getwin() { return *win; } // no longer used
 	private:
 		static float deltaTime;
 		static timeStamp ts;
@@ -31,7 +53,26 @@ namespace tengine
 		bool minimize = false;
 		layerStack ls;
 		imguiLayer* guiLayer;
-		std::shared_ptr<t_window> win;
+		std::shared_ptr<t_window> win; // no longer used
+
+	public:
+		bgfx::Init bgfxInit;
+		SDL_Window* sdlWindow;
+		GLFWwindow* glfwWindow;
+		int width = 1280, height = 720;
+		bgfx::VertexBufferHandle bgfxVertexBuffer;
+		bgfx::IndexBufferHandle bgfxIndexBuffer;
+		bgfx::ProgramHandle program;
+
+		PosColorVertex vertexes[1024];
+		uint32_t indexes[2096];
 	};
 	application* createApplication();
+	static bgfx::ShaderHandle createShader(const std::string& shader, const char* name)
+	{
+		const bgfx::Memory* mem = bgfx::copy(shader.data(), (uint32_t)shader.size());
+		const bgfx::ShaderHandle handle = bgfx::createShader(mem);
+		bgfx::setName(handle, name);
+		return handle;
+	}
 }

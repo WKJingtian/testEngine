@@ -29,7 +29,7 @@ namespace tengine
 
 #define EVENT_CLASS_CATEGORY(x) virtual int getCategoryFlags() const override {return x;}
 
-	class T_API t_event
+	class t_event
 	{
 		friend class t_dispatcher;
 	public:

@@ -3,9 +3,11 @@
 #include "renderer/renderall.h"
 #include "util/utilall.h"
 #include "glm/ext/matrix_transform.hpp"
-#include "yaml/include/yaml-cpp/yaml.h"
-#include "imgui/imgui.h"
+#include "yaml-cpp/yaml.h"
+#include "imgui.h"
 #include "glm/gtx/string_cast.hpp"
+#include "bgfxDraw.h"
+#include "application.h"
 
 namespace YAML
 {
@@ -78,6 +80,15 @@ namespace YAML
 
 namespace tengine
 {
+	uint32_t colorConvert(const glm::vec4& color)
+	{
+		uint32_t result = ((uint8_t)(color.x * 255.0f) << 24)
+			+ ((uint8_t)(color.y * 255.0f) << 16)
+			+ ((uint8_t)(color.z * 255.0f) << 8)
+			+ (uint8_t)(color.w * 255.0f);
+		return result;
+	}
+
 	// scene
 	scene::scene()
 	{
@@ -164,22 +175,55 @@ namespace tengine
 				});
 		}
 
+		int vertexSize = 0;
+		PosColorVertex* vbPtr = application::getApp().vertexes;
+		uint32_t* ibPtr = application::getApp().indexes;
+		primaryCamera.cam.setViewportSize(application::getApp().width, application::getApp().height);
+		glm::mat4 camViewProj = primaryCamera.cam.projection;
+		glm::mat4 tempmat = glm::inverse(entity(cameraEntity, this).transform());
+		camViewProj = camViewProj * tempmat;
+		glm::vec4 p1 = { -0.5f, -0.5f, 0, 1 };
+		glm::vec4 p2 = { 0.5f, -0.5f, 0, 1 };
+		glm::vec4 p3 = { -0.5f, 0.5f, 0, 1 };
+		glm::vec4 p4 = { 0.5f, 0.5f, 0, 1 };
+		glm::vec4 tempPos;
 		auto view4 = reg.view<spriteRenderComponent>();
-		renderer2D::beginScene(primaryCamera.cam, entity(cameraEntity, this).transform());
 		for (auto e : view4)
 		{
 			//log("drawing sprite...", 0);
 			entity temp = entity(e, this);
 			spriteRenderComponent& comp = temp.getComponent<spriteRenderComponent>();
-			if (!comp.tex || comp.tex->src != comp.texPath)
-				comp.tex = texture2D::create(comp.texPath.c_str());
-			renderer2D::drawQuad(temp.transform(),
-				comp.color, comp.tex, comp.coord1, comp.coord2, comp.coord3, comp.coord4);
+			//if (!comp.tex || comp.tex->src != comp.texPath)
+			//	comp.tex = texture2D::create(comp.texPath.c_str());
+			//renderer2D::drawQuad(temp.transform(),
+			//	comp.color, comp.tex, comp.coord1, comp.coord2, comp.coord3, comp.coord4);
+			tempPos = camViewProj * (temp.transform() * p1);
+			*(vbPtr + 0) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
+			tempPos = camViewProj * (temp.transform() * p2);
+			*(vbPtr + 1) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
+			tempPos = camViewProj * (temp.transform() * p3);
+			*(vbPtr + 2) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
+			tempPos = camViewProj * (temp.transform() * p4);
+			*(vbPtr + 3) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
+			//*(ibPtr + 0) = (uint32_t)(vertexSize + 0);
+			//*(ibPtr + 1) = (uint32_t)(vertexSize + 0);
+			//*(ibPtr + 2) = (uint32_t)(vertexSize + 0);
+			*(ibPtr + 0) = (uint32_t)(vertexSize + 2);
+			*(ibPtr + 1) = (uint32_t)(vertexSize + 3);
+			*(ibPtr + 2) = (uint32_t)(vertexSize + 0);
+			//*(ibPtr + 6) = (uint32_t)(vertexSize + 0);
+			//*(ibPtr + 7) = (uint32_t)(vertexSize + 0);
+			//*(ibPtr + 8) = (uint32_t)(vertexSize + 0);
+			*(ibPtr + 3) = (uint32_t)(vertexSize + 3);
+			*(ibPtr + 4) = (uint32_t)(vertexSize + 1);
+			*(ibPtr + 5) = (uint32_t)(vertexSize + 0);
+			vbPtr += 4;
+			vertexSize += 4;
+			ibPtr += 6;
+
 		}
-		renderer2D::endScene();
 
 		auto view5 = reg.view<meshComponent>();
-		renderer3D::beginScene(primaryCamera.cam, entity(cameraEntity, this).transform());
 		for (auto e : view5)
 		{
 			entity temp = entity(e, this);
@@ -196,7 +240,7 @@ namespace tengine
 				glm::vec3 p1 = temp.transform() * glm::vec4(vertex1.position, 1);
 				glm::vec3 p2 = temp.transform() * glm::vec4(vertex2.position, 1);
 				glm::vec3 p3 = temp.transform() * glm::vec4(vertex3.position, 1);
-
+		
 				glm::vec3 lightOn1, lightOn2, lightOn3;
 				if (environmentalLight)
 				{
@@ -210,7 +254,7 @@ namespace tengine
 					lightOn2 = glm::vec3(0);
 					lightOn3 = glm::vec3(0);
 				}
-
+		
 				for (lightInfo& l : lights)
 				{
 					glm::vec3 rPos1 = p1 - l.position;
@@ -260,7 +304,7 @@ namespace tengine
 							l.color.z / 255.0f * magnifier);
 					}
 				}
-
+		
 				glm::vec4 finalColor1 = glm::vec4(
 					lightOn1.x * face.color.x,
 					lightOn1.y * face.color.y,
@@ -277,11 +321,22 @@ namespace tengine
 					lightOn3.z * face.color.z,
 					face.color.w);
 
-				renderer3D::drawTri(face.texture, finalColor1, finalColor2, finalColor3,
-					p1, p2, p3, vertex1.texCoord, vertex2.texCoord, vertex3.texCoord);
+				tempPos = camViewProj * (temp.transform() * glm::vec4(p1, 1));
+				*(vbPtr + 0) = { tempPos.x, tempPos.y, tempPos.z, colorConvert(finalColor1) };
+				tempPos = camViewProj * (temp.transform() * glm::vec4(p2, 1));
+				*(vbPtr + 1) = { tempPos.x, tempPos.y, tempPos.z, colorConvert(finalColor2) };
+				tempPos = camViewProj * (temp.transform() * glm::vec4(p3, 1));
+				*(vbPtr + 2) = { tempPos.x, tempPos.y, tempPos.z, colorConvert(finalColor3) };
+				*(ibPtr + 3) = vertexSize + 0;
+				*(ibPtr + 4) = vertexSize + 1;
+				*(ibPtr + 5) = vertexSize + 2;
+				vbPtr += 3;
+				vertexSize += 3;
+				ibPtr += 3;
 			}
 		}
-		renderer3D::endScene();
+
+		std::cout << "total vertex: " << vertexSize << std::endl;
 	}
 
 	void scene::lightDebug()

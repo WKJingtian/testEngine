@@ -1,5 +1,5 @@
 #pragma once
-#include "entt.h"
+#include "entt/entt.hpp"
 #include "glm/glm.hpp"
 #include "component.h"
 

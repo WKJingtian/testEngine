@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0FFCBCD8-7BDB-3B74-84F3-C64AF051A2D5}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>tengine</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\x86\Release\</OutDir>
+    <IntDir>obj\x86\Release\tengine\</IntDir>
+    <TargetName>tengine</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\x86_64\Release\</OutDir>
+    <IntDir>obj\x86_64\Release\tengine\</IntDir>
+    <TargetName>tengine</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\x86\Debug\</OutDir>
+    <IntDir>obj\x86\Debug\tengine\</IntDir>
+    <TargetName>tengine</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\x86_64\Debug\</OutDir>
+    <IntDir>obj\x86_64\Debug\tengine\</IntDir>
+    <TargetName>tengine</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;GLFW_INCLUDE_NONE;PLATFORM_WINDOWS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\bgfx\include;..\..\bimg\include;..\..\bx\include;..\..\tengine\include;..\..\tengine;..\..\bx\include\compat\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>gdi32.lib;kernel32.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;GLFW_INCLUDE_NONE;PLATFORM_WINDOWS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\bgfx\include;..\..\bimg\include;..\..\bx\include;..\..\tengine\include;..\..\tengine;..\..\bx\include\compat\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>gdi32.lib;kernel32.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_DEBUG;GLFW_INCLUDE_NONE;PLATFORM_WINDOWS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\bgfx\include;..\..\bimg\include;..\..\bx\include;..\..\tengine\include;..\..\tengine;..\..\bx\include\compat\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>gdi32.lib;kernel32.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_DEBUG;GLFW_INCLUDE_NONE;PLATFORM_WINDOWS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\bgfx\include;..\..\bimg\include;..\..\bx\include;..\..\tengine\include;..\..\tengine;..\..\bx\include\compat\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>gdi32.lib;kernel32.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\tengine\editor2d.h" />
+    <ClInclude Include="..\..\tengine\editor_all.h" />
+    <ClInclude Include="..\..\tengine\editor_core.h" />
+    <ClInclude Include="..\..\tengine\include\application.h" />
+    <ClInclude Include="..\..\tengine\include\bgfxDraw.h" />
+    <ClInclude Include="..\..\tengine\include\bgfxImgui.h" />
+    <ClInclude Include="..\..\tengine\include\event\appevent.h" />
+    <ClInclude Include="..\..\tengine\include\event\event.h" />
+    <ClInclude Include="..\..\tengine\include\event\eventall.h" />
+    <ClInclude Include="..\..\tengine\include\event\keyboardevent.h" />
+    <ClInclude Include="..\..\tengine\include\event\mouseevent.h" />
+    <ClInclude Include="..\..\tengine\include\fs_ocornut_imgui.bin.h" />
+    <ClInclude Include="..\..\tengine\include\graphic\camera.h" />
+    <ClInclude Include="..\..\tengine\include\graphic\graphicall.h" />
+    <ClInclude Include="..\..\tengine\include\graphic\winWindow.h" />
+    <ClInclude Include="..\..\tengine\include\graphic\window.h" />
+    <ClInclude Include="..\..\tengine\include\imgui_impl_glfw.h" />
+    <ClInclude Include="..\..\tengine\include\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\..\tengine\include\input.h" />
+    <ClInclude Include="..\..\tengine\include\layer\imguiLayer.h" />
+    <ClInclude Include="..\..\tengine\include\layer\layer.h" />
+    <ClInclude Include="..\..\tengine\include\layer\layerStack.h" />
+    <ClInclude Include="..\..\tengine\include\layer\layerall.h" />
+    <ClInclude Include="..\..\tengine\include\math\mathall.h" />
+    <ClInclude Include="..\..\tengine\include\math\matrix.h" />
+    <ClInclude Include="..\..\tengine\include\math\vector.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\buffer.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\graphicContext.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglBuffer.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglContext.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglRenderAPI.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglTexture.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglVarray.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\renderAPI.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\renderCommand.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\renderall.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\renderer.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\texture.h" />
+    <ClInclude Include="..\..\tengine\include\renderer\vertexArray.h" />
+    <ClInclude Include="..\..\tengine\include\scene\component.h" />
+    <ClInclude Include="..\..\tengine\include\scene\entity.h" />
+    <ClInclude Include="..\..\tengine\include\scene\scene.h" />
+    <ClInclude Include="..\..\tengine\include\scene\sceneall.h" />
+    <ClInclude Include="..\..\tengine\include\scene\serializer.h" />
+    <ClInclude Include="..\..\tengine\include\sdlImgui.h" />
+    <ClInclude Include="..\..\tengine\include\shader\opengl\openglShader.h" />
+    <ClInclude Include="..\..\tengine\include\shader\shader.h" />
+    <ClInclude Include="..\..\tengine\include\shader\shaderLib.h" />
+    <ClInclude Include="..\..\tengine\include\shader\shaderall.h" />
+    <ClInclude Include="..\..\tengine\include\tpch.h" />
+    <ClInclude Include="..\..\tengine\include\util\utilall.h" />
+    <ClInclude Include="..\..\tengine\include\util\utilfile.h" />
+    <ClInclude Include="..\..\tengine\include\util\utillog.h" />
+    <ClInclude Include="..\..\tengine\include\util\utiltimer.h" />
+    <ClInclude Include="..\..\tengine\include\vs_ocornut_imgui.bin.h" />
+    <ClInclude Include="..\..\tengine\scenePanel.h" />
+    <ClInclude Include="..\..\tengine\tengine_all.h" />
+    <ClInclude Include="..\..\tengine\tengine_core.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\tengine\editor.cpp" />
+    <ClCompile Include="..\..\tengine\editor2d.cpp" />
+    <ClCompile Include="..\..\tengine\scenePanel.cpp" />
+    <ClCompile Include="..\..\tengine\src\application.cpp" />
+    <ClCompile Include="..\..\tengine\src\bgfxImGui.cpp" />
+    <ClCompile Include="..\..\tengine\src\graphics.cpp" />
+    <ClCompile Include="..\..\tengine\src\imguiBuild.cpp" />
+    <ClCompile Include="..\..\tengine\src\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\..\tengine\src\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\..\tengine\src\inputs.cpp" />
+    <ClCompile Include="..\..\tengine\src\layers.cpp" />
+    <ClCompile Include="..\..\tengine\src\maths.cpp" />
+    <ClCompile Include="..\..\tengine\src\renderers.cpp" />
+    <ClCompile Include="..\..\tengine\src\scenes.cpp" />
+    <ClCompile Include="..\..\tengine\src\sdlImgui.cpp" />
+    <ClCompile Include="..\..\tengine\src\shaders.cpp" />
+    <ClCompile Include="..\..\tengine\src\tpch.cpp" />
+    <ClCompile Include="..\..\tengine\src\utils.cpp" />
+    <ClCompile Include="..\..\tengine\tengine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Debug\bgfx.lib" />
+    <None Include="Debug\bimg.lib" />
+    <None Include="Debug\bx.lib" />
+    <None Include="Debug\tengine.lib" />
+    <None Include="bin\x86\Debug\bgfx.lib" />
+    <None Include="bin\x86\Debug\bimg.lib" />
+    <None Include="bin\x86\Debug\bx.lib" />
+    <None Include="bin\x86\Debug\tengine.lib" />
+    <None Include="bin\x86_64\Debug\bgfx.lib" />
+    <None Include="bin\x86_64\Debug\bimg.lib" />
+    <None Include="bin\x86_64\Debug\bx.lib" />
+    <None Include="bin\x86_64\Debug\tengine.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="bgfx.vcxproj">
+      <Project>{6C90947C-58C7-950D-01B4-7B10EDC9110F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="bimg.vcxproj">
+      <Project>{C499947C-B0D0-950D-59BD-7B1045D3110F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="bx.vcxproj">
+      <Project>{5F775900-4B03-880B-B4B1-880BA05C880B}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

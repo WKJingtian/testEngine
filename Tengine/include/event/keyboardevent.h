@@ -3,7 +3,7 @@
 
 namespace tengine
 {
-	class T_API keyEvent : public t_event
+	class keyEvent : public t_event
 	{
 	public:
 		inline int getKeycode() const{ return keycode; }
@@ -14,7 +14,7 @@ namespace tengine
 		int keycode;
 	};
 
-	class T_API keyPressedEvent : public keyEvent
+	class keyPressedEvent : public keyEvent
 	{
 	protected:
 		int repeatCount;
@@ -31,7 +31,7 @@ namespace tengine
 		EVENT_CLASS_TYPE(keyReleased)
 	};
 
-	class T_API keyTypedEvent : public keyEvent
+	class keyTypedEvent : public keyEvent
 	{
 	public:
 		keyTypedEvent(int kc)
@@ -45,7 +45,7 @@ namespace tengine
 		EVENT_CLASS_TYPE(keyTyped)
 	};
 
-	class T_API keyReleasedEvent : public keyEvent
+	class keyReleasedEvent : public keyEvent
 	{
 	public:
 		keyReleasedEvent(int kc)
