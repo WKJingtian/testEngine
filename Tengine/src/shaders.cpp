@@ -4,7 +4,6 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
-#include "renderer/renderer.h"
 
 namespace tengine
 {
@@ -13,22 +12,24 @@ namespace tengine
 	shader* shader::create(const std::string& vsrc, const std::string& fsrc)
 	{
 
-		switch (renderer::getAPI())
-		{
-		case API::None: log("giving unsupported renderer API, exit...", 3); exit(EXIT_FAILURE);
-		case API::opengl: return new openglShader(vsrc, fsrc);
-		default: log("directx and vulkan is not supported yet, exit...", 3); exit(EXIT_FAILURE);
-		}
+		//switch (renderer::getAPI())
+		//{
+		//case API::None: log("giving unsupported renderer API, exit...", 3); exit(EXIT_FAILURE);
+		//case API::opengl: return new openglShader(vsrc, fsrc);
+		//default: log("directx and vulkan is not supported yet, exit...", 3); exit(EXIT_FAILURE);
+		//}
+		return NULL; // no longer used
 	}
 	shader* shader::create(const std::string& src)
 	{
 
-		switch (renderer::getAPI())
-		{
-		case API::None: log("giving unsupported renderer API, exit...", 3); exit(EXIT_FAILURE);
-		case API::opengl: return new openglShader(src);
-		default: log("directx and vulkan is not supported yet, exit...", 3); exit(EXIT_FAILURE);
-		}
+		//switch (renderer::getAPI())
+		//{
+		//case API::None: log("giving unsupported renderer API, exit...", 3); exit(EXIT_FAILURE);
+		//case API::opengl: return new openglShader(src);
+		//default: log("directx and vulkan is not supported yet, exit...", 3); exit(EXIT_FAILURE);
+		//}
+		return NULL; // no longer used
 	}
 
 	// opengl Shader

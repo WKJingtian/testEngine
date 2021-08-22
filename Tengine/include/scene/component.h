@@ -3,7 +3,6 @@
 #include "glm/glm.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "tengine_core.h"
-#include "renderer/renderall.h"
 #include "graphic/graphicall.h"
 #include "input.h"
 
@@ -86,7 +85,7 @@ namespace tengine
 		glm::vec2 coord2 = glm::vec2(1, 0);
 		glm::vec2 coord3 = glm::vec2(0, 1);
 		glm::vec2 coord4 = glm::vec2(1, 1);
-		std::shared_ptr<texture2D> tex;
+		std::string tex;
 	};
 
 	struct cameraComponent
@@ -124,7 +123,7 @@ namespace tengine
 		{
 			glm::vec4 color; // 颜色
 			std::string texPath; // 材质
-			std::shared_ptr<texture2D> texture; // 材质
+			std::string texture; // 材质
 			int p1, p2, p3; // 面
 		};
 		std::vector<pointInfo> mesh;
@@ -145,10 +144,10 @@ namespace tengine
 				fc >= mesh.size() ||
 				fa < 0 || fb < 0 || fc < 0)
 			{
-				log("invalid face specified!", 2);
+				//log("invalid face specified!");
 				return;
 			}
-			faces.push_back(faceInfo{col, tex, texture2D::create(tex.c_str()), fa, fb, fc});
+			faces.push_back(faceInfo{col, tex, DEFAULT_WHITE_PIC, fa, fb, fc});
 		}
 		void editPoint(int which,
 			const glm::vec3& pos, const glm::vec2& cor)
@@ -166,13 +165,13 @@ namespace tengine
 				fc >= mesh.size() ||
 				fa < 0 || fb < 0 || fc < 0)
 			{
-				log("invalid face specified!", 2);
+				//log("invalid face specified!", 2);
 				return;
 			}
 			faceInfo& item = faces.at(which);
 			item.color = col;
 			item.texPath = tex;
-			item.texture = texture2D::create(tex.c_str());
+			item.texture = DEFAULT_WHITE_PIC;
 			item.p1 = fa;
 			item.p2 = fb;
 			item.p3 = fc;

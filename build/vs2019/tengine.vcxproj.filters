@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Debug">
-      <UniqueIdentifier>{0C95060D-78A9-2EBE-412B-D21DADFE2AEF}</UniqueIdentifier>
-    </Filter>
     <Filter Include="bin">
       <UniqueIdentifier>{BE61880B-2A6B-887C-B3E6-9E7C1FEF937C}</UniqueIdentifier>
     </Filter>
@@ -12,12 +9,6 @@
     </Filter>
     <Filter Include="bin\x86\Debug">
       <UniqueIdentifier>{293123E7-95F1-9E1D-5E2C-E89ACAABE3F9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="bin\x86_64">
-      <UniqueIdentifier>{DC06FE4A-C8BE-3F98-31C6-18F41D9DDA88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="bin\x86_64\Debug">
-      <UniqueIdentifier>{52C6A088-3EBF-BFDA-67F1-A45F53499FE6}</UniqueIdentifier>
     </Filter>
     <Filter Include="tengine">
       <UniqueIdentifier>{0FFCBCD8-7BDB-3B74-84F3-C64AF051A2D5}</UniqueIdentifier>
@@ -33,15 +24,6 @@
     </Filter>
     <Filter Include="tengine\include\layer">
       <UniqueIdentifier>{EE28696C-5A95-2467-2389-BCC48FB446CF}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="tengine\include\math">
-      <UniqueIdentifier>{BB94687F-A723-F248-5042-06443CB002EF}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="tengine\include\renderer">
-      <UniqueIdentifier>{8894EE39-74B9-3DBA-9D04-234A89883CD8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="tengine\include\renderer\opengl">
-      <UniqueIdentifier>{1CED3AC1-88D0-4901-91D3-773DFD351052}</UniqueIdentifier>
     </Filter>
     <Filter Include="tengine\include\scene">
       <UniqueIdentifier>{3F99E86C-AB05-A467-74F9-3BC5E024C6CF}</UniqueIdentifier>
@@ -102,12 +84,6 @@
     <ClInclude Include="..\..\tengine\include\graphic\graphicall.h">
       <Filter>tengine\include\graphic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\include\graphic\winWindow.h">
-      <Filter>tengine\include\graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\graphic\window.h">
-      <Filter>tengine\include\graphic</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tengine\include\imgui_impl_glfw.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
@@ -128,54 +104,6 @@
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\layer\layerall.h">
       <Filter>tengine\include\layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\math\mathall.h">
-      <Filter>tengine\include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\math\matrix.h">
-      <Filter>tengine\include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\math\vector.h">
-      <Filter>tengine\include\math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\buffer.h">
-      <Filter>tengine\include\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\graphicContext.h">
-      <Filter>tengine\include\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglBuffer.h">
-      <Filter>tengine\include\renderer\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglContext.h">
-      <Filter>tengine\include\renderer\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglRenderAPI.h">
-      <Filter>tengine\include\renderer\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglTexture.h">
-      <Filter>tengine\include\renderer\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglVarray.h">
-      <Filter>tengine\include\renderer\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\renderAPI.h">
-      <Filter>tengine\include\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\renderCommand.h">
-      <Filter>tengine\include\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\renderall.h">
-      <Filter>tengine\include\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\renderer.h">
-      <Filter>tengine\include\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\texture.h">
-      <Filter>tengine\include\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\renderer\vertexArray.h">
-      <Filter>tengine\include\renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\scene\component.h">
       <Filter>tengine\include\scene</Filter>
@@ -269,12 +197,6 @@
     <ClCompile Include="..\..\tengine\src\layers.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\tengine\src\maths.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\renderers.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\tengine\src\scenes.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
@@ -295,18 +217,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Debug\bgfx.lib">
-      <Filter>Debug</Filter>
-    </None>
-    <None Include="Debug\bimg.lib">
-      <Filter>Debug</Filter>
-    </None>
-    <None Include="Debug\bx.lib">
-      <Filter>Debug</Filter>
-    </None>
-    <None Include="Debug\tengine.lib">
-      <Filter>Debug</Filter>
-    </None>
     <None Include="bin\x86\Debug\bgfx.lib">
       <Filter>bin\x86\Debug</Filter>
     </None>
@@ -315,21 +225,6 @@
     </None>
     <None Include="bin\x86\Debug\bx.lib">
       <Filter>bin\x86\Debug</Filter>
-    </None>
-    <None Include="bin\x86\Debug\tengine.lib">
-      <Filter>bin\x86\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\bgfx.lib">
-      <Filter>bin\x86_64\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\bimg.lib">
-      <Filter>bin\x86_64\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\bx.lib">
-      <Filter>bin\x86_64\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\tengine.lib">
-      <Filter>bin\x86_64\Debug</Filter>
     </None>
   </ItemGroup>
 </Project>

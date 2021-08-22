@@ -1,6 +1,5 @@
 #include "tpch.h"
 #include "scene/sceneall.h"
-#include "renderer/renderall.h"
 #include "util/utilall.h"
 #include "glm/ext/matrix_transform.hpp"
 #include "yaml-cpp/yaml.h"
@@ -232,8 +231,8 @@ namespace tengine
 			{
 				//log("drawing face...", 0);
 				if (!meshComponent::faceValid(face, (int)comp.mesh.size())) continue;
-				if (!face.texture || face.texture->src != face.texPath)
-					face.texture = texture2D::create(face.texPath.c_str());
+				//if (!face.texture || face.texture->src != face.texPath)
+				//	face.texture = texture2D::create(face.texPath.c_str());
 				meshComponent::pointInfo& vertex1 = comp.mesh.at(face.p1);
 				meshComponent::pointInfo& vertex2 = comp.mesh.at(face.p2);
 				meshComponent::pointInfo& vertex3 = comp.mesh.at(face.p3);
@@ -376,8 +375,8 @@ namespace tengine
 			for (auto& face : comp.faces)
 			{
 				if (!meshComponent::faceValid(face, (int)comp.mesh.size())) continue;
-				if (!face.texture || face.texture->src != face.texPath)
-					face.texture = texture2D::create(face.texPath.c_str());
+				//if (!face.texture || face.texture->src != face.texPath)
+				//	face.texture = texture2D::create(face.texPath.c_str());
 				meshComponent::pointInfo& vertex1 = comp.mesh.at(face.p1);
 				meshComponent::pointInfo& vertex2 = comp.mesh.at(face.p2);
 				meshComponent::pointInfo& vertex3 = comp.mesh.at(face.p3);

@@ -108,7 +108,9 @@ namespace tengine
 	{
 		if (e.height == 0 || e.width == 0) minimize = true;
 		else minimize = false;
-		renderer::onResized(e.width, e.height);
+		width = e.width;
+		height = e.height;
+		//renderer::onResized(e.width, e.height);
 		return false;
 	}
 

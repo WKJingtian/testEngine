@@ -19,7 +19,7 @@ editor2d::editor2d()
 
 editor2d::~editor2d()
 {
-	delete fb;
+	//delete fb;
 }
 
 void editor2d::onAttach()
@@ -74,8 +74,8 @@ glm::vec2 editor2d::convertMousePos(int mod)
 {
 	float x = input::getmx();
 	float y = input::getmy();
-	uint32_t w = application::getApp().getwin().getWidth();
-	uint32_t h = application::getApp().getwin().getHeight();
+	uint32_t w = application::getApp().width;
+	uint32_t h = application::getApp().height;
 	if (mod == 0)
 	{
 		float yy = -1 * (y - (h / 2.0f)) * (cameraEntity->getComponent<cameraComponent>().cam.orthographicSize) / (h / 2.0f);

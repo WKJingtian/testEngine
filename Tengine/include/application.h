@@ -3,7 +3,6 @@
 #include "event/eventall.h"
 #include "graphic/graphicall.h"
 #include "layer/layerall.h"
-#include "renderer/renderall.h"
 #include "util/utilall.h"
 
 #include "bgfxImgui.h"
@@ -41,7 +40,6 @@ namespace tengine
 		void pushOverlay(t_layer* l);
 		static inline application& getApp() { return *app_instance; }
 		static inline float getDelta() { return deltaTime; }
-		inline t_window& getwin() { return *win; } // no longer used
 	private:
 		static float deltaTime;
 		static timeStamp ts;
@@ -53,7 +51,6 @@ namespace tengine
 		bool minimize = false;
 		layerStack ls;
 		imguiLayer* guiLayer;
-		std::shared_ptr<t_window> win; // no longer used
 
 	public:
 		bgfx::Init bgfxInit;

@@ -188,8 +188,6 @@
     <ClInclude Include="..\..\tengine\include\fs_ocornut_imgui.bin.h" />
     <ClInclude Include="..\..\tengine\include\graphic\camera.h" />
     <ClInclude Include="..\..\tengine\include\graphic\graphicall.h" />
-    <ClInclude Include="..\..\tengine\include\graphic\winWindow.h" />
-    <ClInclude Include="..\..\tengine\include\graphic\window.h" />
     <ClInclude Include="..\..\tengine\include\imgui_impl_glfw.h" />
     <ClInclude Include="..\..\tengine\include\imgui_impl_opengl3.h" />
     <ClInclude Include="..\..\tengine\include\input.h" />
@@ -197,22 +195,6 @@
     <ClInclude Include="..\..\tengine\include\layer\layer.h" />
     <ClInclude Include="..\..\tengine\include\layer\layerStack.h" />
     <ClInclude Include="..\..\tengine\include\layer\layerall.h" />
-    <ClInclude Include="..\..\tengine\include\math\mathall.h" />
-    <ClInclude Include="..\..\tengine\include\math\matrix.h" />
-    <ClInclude Include="..\..\tengine\include\math\vector.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\buffer.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\graphicContext.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglBuffer.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglContext.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglRenderAPI.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglTexture.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\opengl\openglVarray.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\renderAPI.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\renderCommand.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\renderall.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\renderer.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\texture.h" />
-    <ClInclude Include="..\..\tengine\include\renderer\vertexArray.h" />
     <ClInclude Include="..\..\tengine\include\scene\component.h" />
     <ClInclude Include="..\..\tengine\include\scene\entity.h" />
     <ClInclude Include="..\..\tengine\include\scene\scene.h" />
@@ -245,8 +227,6 @@
     <ClCompile Include="..\..\tengine\src\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\..\tengine\src\inputs.cpp" />
     <ClCompile Include="..\..\tengine\src\layers.cpp" />
-    <ClCompile Include="..\..\tengine\src\maths.cpp" />
-    <ClCompile Include="..\..\tengine\src\renderers.cpp" />
     <ClCompile Include="..\..\tengine\src\scenes.cpp" />
     <ClCompile Include="..\..\tengine\src\sdlImgui.cpp" />
     <ClCompile Include="..\..\tengine\src\shaders.cpp" />
@@ -255,18 +235,9 @@
     <ClCompile Include="..\..\tengine\tengine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Debug\bgfx.lib" />
-    <None Include="Debug\bimg.lib" />
-    <None Include="Debug\bx.lib" />
-    <None Include="Debug\tengine.lib" />
     <None Include="bin\x86\Debug\bgfx.lib" />
     <None Include="bin\x86\Debug\bimg.lib" />
     <None Include="bin\x86\Debug\bx.lib" />
-    <None Include="bin\x86\Debug\tengine.lib" />
-    <None Include="bin\x86_64\Debug\bgfx.lib" />
-    <None Include="bin\x86_64\Debug\bimg.lib" />
-    <None Include="bin\x86_64\Debug\bx.lib" />
-    <None Include="bin\x86_64\Debug\tengine.lib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="bgfx.vcxproj">

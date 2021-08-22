@@ -30,8 +30,8 @@ public:
 	glm::vec2 lighPos = glm::vec3(0);
 	glm::vec2 viewportSize;
 
-	// editor
-	frameBuffer* fb = 0;
+	//// editor
+	//frameBuffer* fb = 0;
 
 	// scene
 	scene* activeScene = 0;

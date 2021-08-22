@@ -274,6 +274,7 @@ tengine::application* tengine::createApplication()
 }
 
 #ifdef PLATFORM_WINDOWS
+#define main main
 int main()
 {
 	log("editor started", 1);
