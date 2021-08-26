@@ -64,7 +64,7 @@ namespace tengine
 		if (ImGui::BeginMenu("Options"))
 		{
 			if (ImGui::MenuItem("Close"))
-				application::getApp().onEvent(windowCloseEvent());
+				editorApp::getApp()->running = !editorApp::getApp()->running;
 			if (ImGui::MenuItem("new scene"))
 				context->destroyAll();
 			if (ImGui::MenuItem("save scene") && !saving)
@@ -387,11 +387,11 @@ namespace tengine
 							std::string tex = item.texPath;
 							int pts[3] = { item.p1, item.p2, item.p3 };
 							ImGui::ColorEdit4("color", glm::value_ptr(col));
-							char buf[1024];
-							memset(buf, 0, 1024);
-							memcpy(buf, tex.c_str(), 1024);
-							if (ImGui::InputText("texture Path", buf, sizeof(buf)))
-								tex = buf;
+							//char buf[1024];
+							//memset(buf, 0, 1024);
+							//memcpy(buf, tex.c_str(), 1024);
+							//if (ImGui::InputText("texture Path", buf, sizeof(buf)))
+							//	tex = buf;
 							ImGui::DragInt3("texture coord", pts);
 
 							comp.editFace(ind, col, tex, pts[0], pts[1], pts[2]);

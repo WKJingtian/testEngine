@@ -10,6 +10,12 @@
     <Filter Include="bin\x86\Debug">
       <UniqueIdentifier>{293123E7-95F1-9E1D-5E2C-E89ACAABE3F9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bin\x86_64">
+      <UniqueIdentifier>{DC06FE4A-C8BE-3F98-31C6-18F41D9DDA88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bin\x86_64\Debug">
+      <UniqueIdentifier>{52C6A088-3EBF-BFDA-67F1-A45F53499FE6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="tengine">
       <UniqueIdentifier>{0FFCBCD8-7BDB-3B74-84F3-C64AF051A2D5}</UniqueIdentifier>
     </Filter>
@@ -42,15 +48,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\tengine\editor2d.h">
-      <Filter>tengine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\editor_all.h">
-      <Filter>tengine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\editor_core.h">
-      <Filter>tengine</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tengine\include\application.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
@@ -58,6 +55,27 @@
       <Filter>tengine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\bgfxImgui.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\bigg.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\bigg_assets.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\bigg_imgui.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\bigg_shaders.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\editor2d.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\editor_all.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\editor_core.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\event\appevent.h">
@@ -120,6 +138,9 @@
     <ClInclude Include="..\..\tengine\include\scene\serializer.h">
       <Filter>tengine\include\scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\tengine\include\scenePanel.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\tengine\include\sdlImgui.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
@@ -134,6 +155,12 @@
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\shader\shaderall.h">
       <Filter>tengine\include\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\tengine_all.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\tengine_core.h">
+      <Filter>tengine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\tpch.h">
       <Filter>tengine\include</Filter>
@@ -153,30 +180,21 @@
     <ClInclude Include="..\..\tengine\include\vs_ocornut_imgui.bin.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\scenePanel.h">
-      <Filter>tengine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\tengine_all.h">
-      <Filter>tengine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\tengine_core.h">
-      <Filter>tengine</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\tengine\editor.cpp">
-      <Filter>tengine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\editor2d.cpp">
-      <Filter>tengine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\scenePanel.cpp">
-      <Filter>tengine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\tengine\src\application.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\bgfxImGui.cpp">
+      <Filter>tengine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tengine\src\bigg.cpp">
+      <Filter>tengine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tengine\src\editor.cpp">
+      <Filter>tengine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\tengine\src\editor2d.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\graphics.cpp">
@@ -197,6 +215,9 @@
     <ClCompile Include="..\..\tengine\src\layers.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\tengine\src\scenePanel.cpp">
+      <Filter>tengine\src</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\tengine\src\scenes.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
@@ -206,14 +227,14 @@
     <ClCompile Include="..\..\tengine\src\shaders.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\tengine\src\tengine.cpp">
+      <Filter>tengine\src</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\tengine\src\tpch.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\utils.cpp">
       <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\tengine.cpp">
-      <Filter>tengine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +246,21 @@
     </None>
     <None Include="bin\x86\Debug\bx.lib">
       <Filter>bin\x86\Debug</Filter>
+    </None>
+    <None Include="bin\x86\Debug\tengine.lib">
+      <Filter>bin\x86\Debug</Filter>
+    </None>
+    <None Include="bin\x86_64\Debug\bgfx.lib">
+      <Filter>bin\x86_64\Debug</Filter>
+    </None>
+    <None Include="bin\x86_64\Debug\bimg.lib">
+      <Filter>bin\x86_64\Debug</Filter>
+    </None>
+    <None Include="bin\x86_64\Debug\bx.lib">
+      <Filter>bin\x86_64\Debug</Filter>
+    </None>
+    <None Include="bin\x86_64\Debug\tengine.lib">
+      <Filter>bin\x86_64\Debug</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -278,8 +278,10 @@ tengine::application* tengine::createApplication()
 int main()
 {
 	log("editor started", 1);
-	application app = application();
-	app.run();
+	//application app = application();
+	//app.run();
+	editorApp app;
+	return app.run(0, 0);
 	return 0;
 }
 #endif

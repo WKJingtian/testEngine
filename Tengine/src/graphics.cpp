@@ -161,7 +161,7 @@ namespace tengine
 		//projection = glm::ortho(-r * z, r * z, -z, z, -1.0f, 1.0f);
 		if (aspectRatio == 0)
 		{
-			log("invalid aspect ratio detected (0)", 2);
+			//log("invalid aspect ratio detected (0)", 2);
 			return;
 		}
 		if (type == camType::orthographic)

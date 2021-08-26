@@ -174,12 +174,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\tengine\editor2d.h" />
-    <ClInclude Include="..\..\tengine\editor_all.h" />
-    <ClInclude Include="..\..\tengine\editor_core.h" />
     <ClInclude Include="..\..\tengine\include\application.h" />
     <ClInclude Include="..\..\tengine\include\bgfxDraw.h" />
     <ClInclude Include="..\..\tengine\include\bgfxImgui.h" />
+    <ClInclude Include="..\..\tengine\include\bigg.h" />
+    <ClInclude Include="..\..\tengine\include\bigg_assets.h" />
+    <ClInclude Include="..\..\tengine\include\bigg_imgui.h" />
+    <ClInclude Include="..\..\tengine\include\bigg_shaders.h" />
+    <ClInclude Include="..\..\tengine\include\editor2d.h" />
+    <ClInclude Include="..\..\tengine\include\editor_all.h" />
+    <ClInclude Include="..\..\tengine\include\editor_core.h" />
     <ClInclude Include="..\..\tengine\include\event\appevent.h" />
     <ClInclude Include="..\..\tengine\include\event\event.h" />
     <ClInclude Include="..\..\tengine\include\event\eventall.h" />
@@ -200,44 +204,50 @@
     <ClInclude Include="..\..\tengine\include\scene\scene.h" />
     <ClInclude Include="..\..\tengine\include\scene\sceneall.h" />
     <ClInclude Include="..\..\tengine\include\scene\serializer.h" />
+    <ClInclude Include="..\..\tengine\include\scenePanel.h" />
     <ClInclude Include="..\..\tengine\include\sdlImgui.h" />
     <ClInclude Include="..\..\tengine\include\shader\opengl\openglShader.h" />
     <ClInclude Include="..\..\tengine\include\shader\shader.h" />
     <ClInclude Include="..\..\tengine\include\shader\shaderLib.h" />
     <ClInclude Include="..\..\tengine\include\shader\shaderall.h" />
+    <ClInclude Include="..\..\tengine\include\tengine_all.h" />
+    <ClInclude Include="..\..\tengine\include\tengine_core.h" />
     <ClInclude Include="..\..\tengine\include\tpch.h" />
     <ClInclude Include="..\..\tengine\include\util\utilall.h" />
     <ClInclude Include="..\..\tengine\include\util\utilfile.h" />
     <ClInclude Include="..\..\tengine\include\util\utillog.h" />
     <ClInclude Include="..\..\tengine\include\util\utiltimer.h" />
     <ClInclude Include="..\..\tengine\include\vs_ocornut_imgui.bin.h" />
-    <ClInclude Include="..\..\tengine\scenePanel.h" />
-    <ClInclude Include="..\..\tengine\tengine_all.h" />
-    <ClInclude Include="..\..\tengine\tengine_core.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\tengine\editor.cpp" />
-    <ClCompile Include="..\..\tengine\editor2d.cpp" />
-    <ClCompile Include="..\..\tengine\scenePanel.cpp" />
     <ClCompile Include="..\..\tengine\src\application.cpp" />
     <ClCompile Include="..\..\tengine\src\bgfxImGui.cpp" />
+    <ClCompile Include="..\..\tengine\src\bigg.cpp" />
+    <ClCompile Include="..\..\tengine\src\editor.cpp" />
+    <ClCompile Include="..\..\tengine\src\editor2d.cpp" />
     <ClCompile Include="..\..\tengine\src\graphics.cpp" />
     <ClCompile Include="..\..\tengine\src\imguiBuild.cpp" />
     <ClCompile Include="..\..\tengine\src\imgui_impl_glfw.cpp" />
     <ClCompile Include="..\..\tengine\src\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\..\tengine\src\inputs.cpp" />
     <ClCompile Include="..\..\tengine\src\layers.cpp" />
+    <ClCompile Include="..\..\tengine\src\scenePanel.cpp" />
     <ClCompile Include="..\..\tengine\src\scenes.cpp" />
     <ClCompile Include="..\..\tengine\src\sdlImgui.cpp" />
     <ClCompile Include="..\..\tengine\src\shaders.cpp" />
+    <ClCompile Include="..\..\tengine\src\tengine.cpp" />
     <ClCompile Include="..\..\tengine\src\tpch.cpp" />
     <ClCompile Include="..\..\tengine\src\utils.cpp" />
-    <ClCompile Include="..\..\tengine\tengine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\x86\Debug\bgfx.lib" />
     <None Include="bin\x86\Debug\bimg.lib" />
     <None Include="bin\x86\Debug\bx.lib" />
+    <None Include="bin\x86\Debug\tengine.lib" />
+    <None Include="bin\x86_64\Debug\bgfx.lib" />
+    <None Include="bin\x86_64\Debug\bimg.lib" />
+    <None Include="bin\x86_64\Debug\bx.lib" />
+    <None Include="bin\x86_64\Debug\tengine.lib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="bgfx.vcxproj">

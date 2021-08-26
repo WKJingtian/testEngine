@@ -175,9 +175,11 @@ namespace tengine
 		}
 
 		int vertexSize = 0;
-		PosColorVertex* vbPtr = application::getApp().vertexes;
-		uint32_t* ibPtr = application::getApp().indexes;
-		primaryCamera.cam.setViewportSize(application::getApp().width, application::getApp().height);
+		memset(editorApp::getApp()->vertexes, 0, 1024 * sizeof(PosColorVertex));
+		memset(editorApp::getApp()->indexes, 0, 4096 * sizeof(uint32_t));
+		PosColorVertex* vbPtr = editorApp::getApp()->vertexes;
+		uint32_t* ibPtr = editorApp::getApp()->indexes;
+		primaryCamera.cam.setViewportSize(editorApp::getApp()->width, editorApp::getApp()->height);
 		glm::mat4 camViewProj = primaryCamera.cam.projection;
 		glm::mat4 tempmat = glm::inverse(entity(cameraEntity, this).transform());
 		camViewProj = camViewProj * tempmat;
@@ -204,15 +206,9 @@ namespace tengine
 			*(vbPtr + 2) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
 			tempPos = camViewProj * (temp.transform() * p4);
 			*(vbPtr + 3) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
-			//*(ibPtr + 0) = (uint32_t)(vertexSize + 0);
-			//*(ibPtr + 1) = (uint32_t)(vertexSize + 0);
-			//*(ibPtr + 2) = (uint32_t)(vertexSize + 0);
 			*(ibPtr + 0) = (uint32_t)(vertexSize + 2);
 			*(ibPtr + 1) = (uint32_t)(vertexSize + 3);
 			*(ibPtr + 2) = (uint32_t)(vertexSize + 0);
-			//*(ibPtr + 6) = (uint32_t)(vertexSize + 0);
-			//*(ibPtr + 7) = (uint32_t)(vertexSize + 0);
-			//*(ibPtr + 8) = (uint32_t)(vertexSize + 0);
 			*(ibPtr + 3) = (uint32_t)(vertexSize + 3);
 			*(ibPtr + 4) = (uint32_t)(vertexSize + 1);
 			*(ibPtr + 5) = (uint32_t)(vertexSize + 0);
@@ -334,8 +330,6 @@ namespace tengine
 				ibPtr += 3;
 			}
 		}
-
-		std::cout << "total vertex: " << vertexSize << std::endl;
 	}
 
 	void scene::lightDebug()

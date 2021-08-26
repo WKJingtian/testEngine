@@ -155,4 +155,88 @@ namespace tengine
 		ls.pushOverlay(l);
 		l->onAttach();
 	}
+
+	editorApp* editorApp::editor = 0;
+
+	void editorApp::initialize(int _argc, char** _argv)
+	{
+		if (editor == nullptr) editor = this;
+		else errout("multiple editor instance created");
+		running = true;
+	}
+
+	void editorApp::onReset()
+	{
+		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x000055FF, 1.0f, 0);
+		bgfx::setViewRect(0, 0, 0, uint16_t(getWidth()), uint16_t(getHeight()));
+		pushLayer(new editor2d());
+
+		bgfx::VertexLayout layout = bgfx::VertexLayout();
+		memset(vertexes, 0, 1024 * sizeof(PosColorVertex));
+		memset(indexes, 0, 4096 * sizeof(uint32_t));
+		layout
+			.begin()
+			.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+			.end();
+		bgfxVertexBuffer = bgfx::createVertexBuffer(
+			bgfx::makeRef(vertexes, 1024),
+			layout);
+		bgfxIndexBuffer = bgfx::createIndexBuffer(
+			bgfx::makeRef(indexes, 4096));
+
+		std::string vshader;
+		if (!read_file("./asset/shader/bgfxVertex.bin", vshader))
+			errout("vertex shader compile failed");
+
+		std::string fshader;
+		if (!read_file("./asset/shader/bgfxFrag.bin", fshader))
+			errout("fragment shader compile failed");
+
+		bgfx::ShaderHandle vShader = createShader(vshader, "bgfx vertex shader");
+		bgfx::ShaderHandle fShader = createShader(fshader, "bgfx fragment shader");
+
+		program = bgfx::createProgram(vShader, fShader, true);
+	}
+
+	void editorApp::update(float dt)
+	{
+		//if (!running) exit(0);
+		bgfx::VertexLayout layout = bgfx::VertexLayout();
+		memset(vertexes, 0, 1024 * sizeof(PosColorVertex));
+		memset(indexes, 0, 4096 * sizeof(uint32_t));
+		layout
+			.begin()
+			.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+			.end();
+		bgfxVertexBuffer = bgfx::createVertexBuffer(
+			bgfx::makeRef(vertexes, 1024),
+			layout);
+		bgfxIndexBuffer = bgfx::createIndexBuffer(
+			bgfx::makeRef(indexes, 4096));
+
+		bgfx::touch(0);
+		for (t_layer* l : ls) l->onUpdate(dt);
+		for (t_layer* l : ls) l->guiRender();
+
+		bgfx::setVertexBuffer(0, bgfxVertexBuffer);
+		bgfx::setIndexBuffer(bgfxIndexBuffer);
+		bgfx::setState(BGFX_STATE_DEFAULT);
+		bgfx::submit(0, program);
+
+		//memset(indexes, 0, 4096 * sizeof(uint32_t));
+		//uint32_t indsum = 0;
+		//for (uint32_t i = 0; i < 4096; i++)
+		//{
+		//	if (indexes[i] != 0) indsum = i;
+		//}
+		//std::cout << indsum << "<- this is indsum\n";
+	}
+
+	void editorApp::pushLayer(t_layer* l)
+	{
+		ls.pushLayer(l);
+		l->onAttach();
+	}
 }
