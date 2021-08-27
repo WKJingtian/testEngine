@@ -33,8 +33,8 @@ void editor2d::onAttach()
 	// entity system
 	activeScene = new scene();
 	cameraEntity = activeScene->createEntity();
-	cameraEntity->addComponent<cameraComponent>(sceneCamera());
-	cameraEntity->getComponent<cameraComponent>().cam.setViewportSize(1280, 720);
+	cameraEntity->addComponent<cameraComponent>();
+	cameraEntity->getComponent<cameraComponent>().setViewportSize(1280, 720);
 	cameraEntity->addComponent<nativeScriptComponent>(nativeScriptComponent()).bind<cameraController>();
 	activeScene->createEntity()->addComponent<spriteRenderComponent>();
 	sp.setContext(activeScene);
@@ -78,9 +78,9 @@ glm::vec2 editor2d::convertMousePos(int mod)
 	uint32_t h = application::getApp().height;
 	if (mod == 0)
 	{
-		float yy = -1 * (y - (h / 2.0f)) * (cameraEntity->getComponent<cameraComponent>().cam.orthographicSize) / (h / 2.0f);
-		float xx = (x - (w / 2.0f)) * (cameraEntity->getComponent<cameraComponent>().cam.orthographicSize
-			* cameraEntity->getComponent<cameraComponent>().cam.aspectRatio) / (w / 2.0f);
+		float yy = -1 * (y - (h / 2.0f)) * (cameraEntity->getComponent<cameraComponent>().orthographicSize) / (h / 2.0f);
+		float xx = (x - (w / 2.0f)) * (cameraEntity->getComponent<cameraComponent>().orthographicSize
+			* cameraEntity->getComponent<cameraComponent>().aspectRatio) / (w / 2.0f);
 		return glm::vec2(xx, yy) + glm::vec2(cameraEntity->getComponent<transformComponent>().translate[0],
 			cameraEntity->getComponent<transformComponent>().translate[1]);
 	}

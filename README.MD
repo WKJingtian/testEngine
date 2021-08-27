@@ -1,3 +1,5 @@
 请使用Visual studio 2019进行编译
 使用BGFX重写，目前的问题：
-IMGUI无法和bgfx渲染的画面同时出现
+跑一段时间后vertexbuffer会出问题
+有一些没用的代码还没删
+Blending待添加

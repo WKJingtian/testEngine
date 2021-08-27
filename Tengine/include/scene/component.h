@@ -1,10 +1,12 @@
 #pragma once
 #include "entt/entt.hpp"
 #include "glm/glm.hpp"
+#include "glm/ext.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "tengine_core.h"
 #include "graphic/graphicall.h"
 #include "input.h"
+#include "bigg.h"
 
 namespace tengine
 {
@@ -90,12 +92,43 @@ namespace tengine
 
 	struct cameraComponent
 	{
-		sceneCamera cam;
+		float aspectRatio = 1080.0f / 720.0f;
+
+		float orthographicSize = 10.0f;
+		float orthographicNear = -1.0f;
+		float orthographicFar = 1.0f;
+
+		float perspectiveFOV = 45.0f;
+		float perspectiveNear = 0.01f;
+		float perspectiveFar = 1000.0f;
+
 		bool primary = true;
 		bool fixRatio = false;
+
 		cameraComponent() = default;
 		cameraComponent(const cameraComponent&) = default;
-		cameraComponent(const sceneCamera& c) : cam(c) {}
+
+		void setPerspective(float FOV, float n, float f)
+		{
+			//type = sceneCamera::camType::perspective;
+			perspectiveFOV = FOV;
+			perspectiveNear = n;
+			perspectiveFar = f;
+		}
+		void setViewportSize(uint32_t w, uint32_t h)
+		{
+			aspectRatio = (float)w / (float)h;
+		}
+		glm::mat4 getProjection()
+		{
+			//projection = glm::ortho(-r * z, r * z, -z, z, -1.0f, 1.0f);
+			if (aspectRatio == 0)
+			{
+				//log("invalid aspect ratio detected (0)", 2);
+				return glm::mat4(1);
+			}
+			return glm::perspective(glm::radians(perspectiveFOV), aspectRatio, perspectiveNear, perspectiveFar);
+		}
 	};
 
 	struct nativeScriptComponent
@@ -243,6 +276,15 @@ namespace tengine
 		float rotSpeed = 0;
 		particleComponent2D() = default;
 		particleComponent2D(const particleComponent2D&) = default;
+	};
+
+	struct uiShape
+	{
+		glm::vec3 p1 = glm::vec3(0);
+		glm::vec3 p2 = glm::vec3(0);
+		glm::vec3 p3 = glm::vec3(0);
+		uiShape() = default;
+		uiShape(const uiShape&) = default;
 	};
 
 }

@@ -5,6 +5,7 @@
 #include "yaml-cpp/yaml.h"
 #include "imgui.h"
 #include "glm/gtx/string_cast.hpp"
+#include "glm/gtc/type_ptr.hpp"
 #include "bgfxDraw.h"
 #include "application.h"
 
@@ -81,10 +82,10 @@ namespace tengine
 {
 	uint32_t colorConvert(const glm::vec4& color)
 	{
-		uint32_t result = ((uint8_t)(color.x * 255.0f) << 24)
-			+ ((uint8_t)(color.y * 255.0f) << 16)
-			+ ((uint8_t)(color.z * 255.0f) << 8)
-			+ (uint8_t)(color.w * 255.0f);
+		uint32_t result = ((uint8_t)(color.w * 255.0f) << 24)
+			+ ((uint8_t)(color.z * 255.0f) << 16)
+			+ ((uint8_t)(color.y * 255.0f) << 8)
+			+ (uint8_t)(color.x * 255.0f);
 		return result;
 	}
 
@@ -174,20 +175,27 @@ namespace tengine
 				});
 		}
 
-		int vertexSize = 0;
-		memset(editorApp::getApp()->vertexes, 0, 1024 * sizeof(PosColorVertex));
-		memset(editorApp::getApp()->indexes, 0, 4096 * sizeof(uint32_t));
-		PosColorVertex* vbPtr = editorApp::getApp()->vertexes;
-		uint32_t* ibPtr = editorApp::getApp()->indexes;
-		primaryCamera.cam.setViewportSize(editorApp::getApp()->width, editorApp::getApp()->height);
-		glm::mat4 camViewProj = primaryCamera.cam.projection;
-		glm::mat4 tempmat = glm::inverse(entity(cameraEntity, this).transform());
-		camViewProj = camViewProj * tempmat;
+		const glm::mat4 inverted = glm::inverse(cameraEntity.transform());
+		const glm::vec3 forward = glm::normalize(glm::vec3(inverted[2]));
+		const glm::vec4 upward = cameraEntity.transform() * glm::vec4(0, 1, 0, 0);
+		bgfx::setViewTransform(0,
+			//glm::value_ptr(glm::inverse(cameraEntity.transform())),
+			glm::value_ptr(glm::lookAt(
+				cameraEntity.getComponent<transformComponent>().translate,
+				forward,
+				glm::normalize(glm::vec3(upward.x, upward.y, upward.z))
+				)),
+			glm::value_ptr(primaryCamera.getProjection())
+			);
+
+		PosColorVertex* vbPtr = &(editorApp::getApp()->vertexes[0]);
+		uint32_t* ibPtr = &(editorApp::getApp()->indexes[0]);
+		int counter = 0;
+
 		glm::vec4 p1 = { -0.5f, -0.5f, 0, 1 };
 		glm::vec4 p2 = { 0.5f, -0.5f, 0, 1 };
 		glm::vec4 p3 = { -0.5f, 0.5f, 0, 1 };
 		glm::vec4 p4 = { 0.5f, 0.5f, 0, 1 };
-		glm::vec4 tempPos;
 		auto view4 = reg.view<spriteRenderComponent>();
 		for (auto e : view4)
 		{
@@ -198,24 +206,30 @@ namespace tengine
 			//	comp.tex = texture2D::create(comp.texPath.c_str());
 			//renderer2D::drawQuad(temp.transform(),
 			//	comp.color, comp.tex, comp.coord1, comp.coord2, comp.coord3, comp.coord4);
-			tempPos = camViewProj * (temp.transform() * p1);
-			*(vbPtr + 0) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
-			tempPos = camViewProj * (temp.transform() * p2);
-			*(vbPtr + 1) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
-			tempPos = camViewProj * (temp.transform() * p3);
-			*(vbPtr + 2) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
-			tempPos = camViewProj * (temp.transform() * p4);
-			*(vbPtr + 3) = { tempPos.x, tempPos.y, 0, colorConvert(comp.color) };
-			*(ibPtr + 0) = (uint32_t)(vertexSize + 2);
-			*(ibPtr + 1) = (uint32_t)(vertexSize + 3);
-			*(ibPtr + 2) = (uint32_t)(vertexSize + 0);
-			*(ibPtr + 3) = (uint32_t)(vertexSize + 3);
-			*(ibPtr + 4) = (uint32_t)(vertexSize + 1);
-			*(ibPtr + 5) = (uint32_t)(vertexSize + 0);
+			//PosColorVertex vbPtr[4];
+			//uint32_t ibPtr[6];
+			//bgfx::VertexLayout layout = bgfx::VertexLayout();
+			//layout
+			//	.begin()
+			//	.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			//	.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+			//	.end();
+			//auto vbo = bgfx::createVertexBuffer(bgfx::makeRef(vbPtr, 4 * sizeof(PosColorVertex)), layout);
+			//auto ibo = bgfx::createIndexBuffer(bgfx::makeRef(ibPtr, 6 * sizeof(uint32_t)));
+			vbPtr[0] = { (temp.transform()*p1).x, (temp.transform()*p1).y, (temp.transform()*p1).z, colorConvert(comp.color) };
+			vbPtr[1] = { (temp.transform()*p2).x, (temp.transform()*p2).y, (temp.transform()*p2).z, colorConvert(comp.color) };
+			vbPtr[2] = { (temp.transform()*p3).x, (temp.transform()*p3).y, (temp.transform()*p3).z, colorConvert(comp.color) };
+			vbPtr[3] = { (temp.transform()*p4).x, (temp.transform()*p4).y, (temp.transform()*p4).z, colorConvert(comp.color) };
+			ibPtr[0] = 3 + counter; ibPtr[1] = 2 + counter; ibPtr[2] = 0 + counter;
+			ibPtr[3] = 1 + counter; ibPtr[4] = 3 + counter; ibPtr[5] = 0 + counter;
+			counter += 4;
 			vbPtr += 4;
-			vertexSize += 4;
 			ibPtr += 6;
 
+			//bgfx::setTransform(glm::value_ptr(temp.transform()));
+			//bgfx::setVertexBuffer(0, vbo);
+			//bgfx::setIndexBuffer(ibo);
+			//bgfx::submit(0, editorApp::getApp()->program);
 		}
 
 		auto view5 = reg.view<meshComponent>();
@@ -225,8 +239,8 @@ namespace tengine
 			meshComponent& comp = temp.getComponent<meshComponent>();
 			for (auto& face : comp.faces)
 			{
-				//log("drawing face...", 0);
 				if (!meshComponent::faceValid(face, (int)comp.mesh.size())) continue;
+				//log("drawing face...", 0);
 				//if (!face.texture || face.texture->src != face.texPath)
 				//	face.texture = texture2D::create(face.texPath.c_str());
 				meshComponent::pointInfo& vertex1 = comp.mesh.at(face.p1);
@@ -316,19 +330,60 @@ namespace tengine
 					lightOn3.z * face.color.z,
 					face.color.w);
 
-				tempPos = camViewProj * (temp.transform() * glm::vec4(p1, 1));
-				*(vbPtr + 0) = { tempPos.x, tempPos.y, tempPos.z, colorConvert(finalColor1) };
-				tempPos = camViewProj * (temp.transform() * glm::vec4(p2, 1));
-				*(vbPtr + 1) = { tempPos.x, tempPos.y, tempPos.z, colorConvert(finalColor2) };
-				tempPos = camViewProj * (temp.transform() * glm::vec4(p3, 1));
-				*(vbPtr + 2) = { tempPos.x, tempPos.y, tempPos.z, colorConvert(finalColor3) };
-				*(ibPtr + 3) = vertexSize + 0;
-				*(ibPtr + 4) = vertexSize + 1;
-				*(ibPtr + 5) = vertexSize + 2;
+				//PosColorVertex vbPtr[3];
+				//uint32_t ibPtr[3];
+				vbPtr[0] = { p1.x, p1.y, p1.z, colorConvert(finalColor1) };
+				vbPtr[1] = { p2.x, p2.y, p2.z, colorConvert(finalColor2) };
+				vbPtr[2] = { p3.x, p3.y, p3.z, colorConvert(finalColor3) };
+				ibPtr[0] = 0 + counter; ibPtr[1] = 1 + counter; ibPtr[2] = 2 + counter;
+				counter += 3;
 				vbPtr += 3;
-				vertexSize += 3;
 				ibPtr += 3;
+
+				//bgfx::VertexLayout layout = bgfx::VertexLayout();
+				//layout
+				//	.begin()
+				//	.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+				//	.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+				//	.end();
+				//bgfx::setTransform(glm::value_ptr(temp.transform()));
+				//bgfx::setVertexBuffer(0, bgfx::createVertexBuffer(
+				//	bgfx::makeRef(vbPtr, 3), layout));
+				//bgfx::setIndexBuffer(bgfx::createIndexBuffer(bgfx::makeRef(ibPtr, 3)));
+				//bgfx::submit(0, editorApp::getApp()->program);
 			}
+		}
+
+		auto view6 = reg.view<uiShape>();
+		for (auto e : view6)
+		{
+			//log("drawing sprite...", 0);
+			entity temp = entity(e, this);
+			uiShape& comp = temp.getComponent<uiShape>();
+			//PosColorVertex vbPtr[3];
+			//uint32_t ibPtr[3];
+			glm::vec4 p1 = temp.transform() * glm::vec4(comp.p1, 1);
+			glm::vec4 p2 = temp.transform() * glm::vec4(comp.p2, 1);
+			glm::vec4 p3 = temp.transform() * glm::vec4(comp.p3, 1);
+			vbPtr[0] = { p1.x, p1.y, p1.z, 0xFFFFFFFF };
+			vbPtr[1] = { p2.x, p2.y, p2.z, 0xFFFFFFFF };
+			vbPtr[2] = { p3.x, p3.y, p3.z, 0xFFFFFFFF };
+			ibPtr[0] = 0 + counter; ibPtr[1] = 1 + counter; ibPtr[2] = 2 + counter;
+			counter += 3;
+			vbPtr += 3;
+			ibPtr += 3;
+
+			//bgfx::VertexLayout layout = bgfx::VertexLayout();
+			//layout
+			//	.begin()
+			//	.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			//	.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+			//	.end();
+			//bgfx::setTransform(glm::value_ptr(temp.transform()));
+			//bgfx::setVertexBuffer(0, bgfx::createVertexBuffer(
+			//	bgfx::makeRef(vbPtr, 3), layout));
+			//bgfx::setIndexBuffer(bgfx::createIndexBuffer(bgfx::makeRef(ibPtr, 3)));
+			//bgfx::submit(0, editorApp::getApp()->program);
 		}
 	}
 
@@ -450,7 +505,7 @@ namespace tengine
 		for (auto& e : view)
 		{
 			auto& cc = view.get<cameraComponent>(e);
-			if (!cc.fixRatio) cc.cam.setViewportSize(x, y);
+			if (!cc.fixRatio) cc.setViewportSize(x, y);
 		}
 	}
 	bool scene::isValid(entity e)
@@ -527,14 +582,14 @@ namespace tengine
 			auto& comp = ent.getComponent<cameraComponent>();
 			out << YAML::Key << "camera component";
 			out << YAML::BeginMap;
-			out << YAML::Key << "camera type" << YAML::Value << (int)comp.cam.type;
-			out << YAML::Key << "perspective FOV" << YAML::Value << comp.cam.perspectiveFOV;
-			out << YAML::Key << "perspective near" << YAML::Value << comp.cam.perspectiveNear;
-			out << YAML::Key << "perspective far" << YAML::Value << comp.cam.perspectiveFar;
-			out << YAML::Key << "orthographic size" << YAML::Value << comp.cam.orthographicSize;
-			out << YAML::Key << "orthographic near" << YAML::Value << comp.cam.orthographicNear;
-			out << YAML::Key << "orthographic far" << YAML::Value << comp.cam.orthographicFar;
-			out << YAML::Key << "aspect ratio" << YAML::Value << comp.cam.aspectRatio;
+			//out << YAML::Key << "camera type" << YAML::Value << (int)comp.type;
+			out << YAML::Key << "perspective FOV" << YAML::Value << comp.perspectiveFOV;
+			out << YAML::Key << "perspective near" << YAML::Value << comp.perspectiveNear;
+			out << YAML::Key << "perspective far" << YAML::Value << comp.perspectiveFar;
+			out << YAML::Key << "orthographic size" << YAML::Value << comp.orthographicSize;
+			out << YAML::Key << "orthographic near" << YAML::Value << comp.orthographicNear;
+			out << YAML::Key << "orthographic far" << YAML::Value << comp.orthographicFar;
+			out << YAML::Key << "aspect ratio" << YAML::Value << comp.aspectRatio;
 
 			out << YAML::Key << "is primary" << YAML::Value << comp.primary;
 			out << YAML::Key << "is fixed ratio" << YAML::Value << comp.fixRatio;
@@ -662,16 +717,16 @@ namespace tengine
 				if (ent["camera component"])
 				{
 					auto& comp = newEnt->addComponent<cameraComponent>();
-					comp.cam.type = (sceneCamera::camType)ent["camera component"]["camera type"].as<int>();
+					//comp.cam.type = (sceneCamera::camType)ent["camera component"]["camera type"].as<int>();
 					comp.fixRatio = ent["camera component"]["is fixed ratio"].as<bool>();
 					comp.primary = ent["camera component"]["is primary"].as<bool>();
-					comp.cam.aspectRatio = ent["camera component"]["aspect ratio"].as<float>();
-					comp.cam.perspectiveFOV = ent["camera component"]["perspective FOV"].as<float>();
-					comp.cam.perspectiveNear = ent["camera component"]["perspective near"].as<float>();
-					comp.cam.perspectiveFar = ent["camera component"]["perspective far"].as<float>();
-					comp.cam.orthographicSize = ent["camera component"]["orthographic size"].as<float>();
-					comp.cam.orthographicNear = ent["camera component"]["orthographic near"].as<float>();
-					comp.cam.orthographicFar = ent["camera component"]["orthographic far"].as<float>();
+					comp.aspectRatio = ent["camera component"]["aspect ratio"].as<float>();
+					comp.perspectiveFOV = ent["camera component"]["perspective FOV"].as<float>();
+					comp.perspectiveNear = ent["camera component"]["perspective near"].as<float>();
+					comp.perspectiveFar = ent["camera component"]["perspective far"].as<float>();
+					comp.orthographicSize = ent["camera component"]["orthographic size"].as<float>();
+					comp.orthographicNear = ent["camera component"]["orthographic near"].as<float>();
+					comp.orthographicFar = ent["camera component"]["orthographic far"].as<float>();
 				}
 				if (ent["sprite component"])
 				{

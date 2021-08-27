@@ -10,6 +10,8 @@
 #include "bgfx/bgfx.h"
 #include "bgfx/platform.h"
 #include "bx/math.h"
+#include "bx/bx.h"
+#include "bx/debug.h"
 #include "imgui.h"
 #include "bgfxDraw.h"
 
@@ -86,6 +88,8 @@ namespace tengine
 		void update(float dt);
 
 		void pushLayer(t_layer* l);
+
+		int vTest = 0;
 	public:
 		// ATTRIBUTES
 		layerStack ls;

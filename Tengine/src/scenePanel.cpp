@@ -165,6 +165,11 @@ namespace tengine
 				selectedEntity.addComponent<cameraComponent>();
 				ImGui::CloseCurrentPopup();
 			}
+			if (ImGui::MenuItem("uiShape"))
+			{
+				selectedEntity.addComponent<uiShape>();
+				ImGui::CloseCurrentPopup();
+			}
 			if (ImGui::MenuItem("2D sprite"))
 			{
 				selectedEntity.addComponent<spriteRenderComponent>();
@@ -224,6 +229,18 @@ namespace tengine
 		// special components
 		const ImGuiTreeNodeFlags treeFlag = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_AllowItemOverlap;
 
+		if (e.hasComponent<uiShape>())
+		{
+			bool opened = ImGui::TreeNodeEx((void*)typeid(uiShape).hash_code(), treeFlag, "camera");
+			bool componentDelete = false;
+			ImGui::SameLine();
+			if (ImGui::Button("remove component")) componentDelete = true;
+			auto& comp = e.getComponent<uiShape>();
+			ImGui::DragFloat3("p1", glm::value_ptr(comp.p1));
+			ImGui::DragFloat3("p2", glm::value_ptr(comp.p2));
+			ImGui::DragFloat3("p3", glm::value_ptr(comp.p3));
+			if (componentDelete) e.removeComponent<uiShape>();
+		}
 		if (e.hasComponent<cameraComponent>())
 		{
 			bool opened = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), treeFlag, "camera");
@@ -235,34 +252,33 @@ namespace tengine
 				auto& comp = e.getComponent<cameraComponent>();
 
 				char* typeTag[] = {"orthographic camera", "perspective camera"};
-				if (ImGui::BeginCombo("Projection", typeTag[(int)comp.cam.type]))
-				{
-					for (int i = 0; i < 2; i++)
-					{
-						bool selected = (int)comp.cam.type == i;
-						if (ImGui::Selectable(typeTag[i], selected))
-							comp.cam.type = (sceneCamera::camType)i;
-						if (selected) ImGui::SetItemDefaultFocus();
-					}
-					ImGui::EndCombo();
-				}
+				//if (ImGui::BeginCombo("Projection", typeTag[(int)comp.cam.type]))
+				//{
+				//	for (int i = 0; i < 2; i++)
+				//	{
+				//		bool selected = (int)comp.cam.type == i;
+				//		if (ImGui::Selectable(typeTag[i], selected))
+				//			comp.cam.type = (sceneCamera::camType)i;
+				//		if (selected) ImGui::SetItemDefaultFocus();
+				//	}
+				//	ImGui::EndCombo();
+				//}
 				if (comp.fixRatio)
-					ImGui::DragFloat("Ratio", &comp.cam.aspectRatio);
+					ImGui::DragFloat("Ratio", &comp.aspectRatio);
 
-				if ((int)comp.cam.type == 0) // orthographic
-				{
-					ImGui::DragFloat("Size", &comp.cam.orthographicSize);
-					ImGui::DragFloat("Near", &comp.cam.orthographicNear);
-					ImGui::DragFloat("Far", &comp.cam.orthographicFar);
-					comp.cam.recalculate();
-				}
-				if ((int)comp.cam.type == 1) // perspective
-				{
-					ImGui::DragFloat("field of view", &comp.cam.perspectiveFOV);
-					ImGui::DragFloat("Near", &comp.cam.perspectiveNear);
-					ImGui::DragFloat("Far", &comp.cam.perspectiveFar);
-					comp.cam.recalculate();
-				}
+				//if ((int)comp.type == 0) // orthographic
+				//{
+				//	ImGui::DragFloat("Size", &comp.cam.orthographicSize);
+				//	ImGui::DragFloat("Near", &comp.cam.orthographicNear);
+				//	ImGui::DragFloat("Far", &comp.cam.orthographicFar);
+				//	comp.cam.recalculate();
+				//}
+				//if ((int)comp.cam.type == 1) // perspective
+				//{
+					ImGui::DragFloat("field of view", &comp.perspectiveFOV);
+					ImGui::DragFloat("Near", &comp.perspectiveNear);
+					ImGui::DragFloat("Far", &comp.perspectiveFar);
+				//}
 				ImGui::TreePop();
 			}
 			if (componentDelete) e.removeComponent<cameraComponent>();
