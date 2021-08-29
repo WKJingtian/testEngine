@@ -195,7 +195,6 @@
     <ClInclude Include="..\..\tengine\include\imgui_impl_glfw.h" />
     <ClInclude Include="..\..\tengine\include\imgui_impl_opengl3.h" />
     <ClInclude Include="..\..\tengine\include\input.h" />
-    <ClInclude Include="..\..\tengine\include\layer\imguiLayer.h" />
     <ClInclude Include="..\..\tengine\include\layer\layer.h" />
     <ClInclude Include="..\..\tengine\include\layer\layerStack.h" />
     <ClInclude Include="..\..\tengine\include\layer\layerall.h" />

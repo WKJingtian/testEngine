@@ -7,6 +7,7 @@
 #include "graphic/graphicall.h"
 #include "input.h"
 #include "bigg.h"
+#include "bgfxDraw.h"
 
 namespace tengine
 {
@@ -76,6 +77,7 @@ namespace tengine
 
 	struct spriteRenderComponent
 	{
+
 		glm::vec4 color{ 1 };
 		std::string texPath = DEFAULT_WHITE_PIC;
 
@@ -88,6 +90,38 @@ namespace tengine
 		glm::vec2 coord3 = glm::vec2(0, 1);
 		glm::vec2 coord4 = glm::vec2(1, 1);
 		std::string tex;
+
+		bgfx::VertexBufferHandle getQVBO()
+		{
+			bgfx::VertexLayout layout = bgfx::VertexLayout();
+			layout
+				.begin()
+				.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+				.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+				.end();
+			uint32_t bgfxColor = ((uint8_t)(color.w * 255.0f) << 24)
+				+ ((uint8_t)(color.z * 255.0f) << 16)
+				+ ((uint8_t)(color.y * 255.0f) << 8)
+				+ (uint8_t)(color.x * 255.0f);
+			PosColorVertex QVBO[] =
+			{
+				{-1.0f,  1.0f,  0.0f, bgfxColor },
+				{ 1.0f,  1.0f,  0.0f, bgfxColor },
+				{-1.0f, -1.0f,  0.0f, bgfxColor },
+				{ 1.0f, -1.0f,  0.0f, bgfxColor },
+			};
+			static bgfx::VertexBufferHandle vboHandle =
+				bgfx::createVertexBuffer(bgfx::makeRef(QVBO, sizeof(QVBO)), layout);
+			return vboHandle;
+		}
+
+		bgfx::IndexBufferHandle getQIBO()
+		{
+			static const uint16_t QIBO[] = { 2, 0, 1, 2, 1, 3 };
+			static bgfx::IndexBufferHandle iboHandle =
+				bgfx::createIndexBuffer(bgfx::makeRef(QIBO, sizeof(QIBO)));
+			return iboHandle;
+		}
 	};
 
 	struct cameraComponent
@@ -285,6 +319,12 @@ namespace tengine
 		glm::vec3 p3 = glm::vec3(0);
 		uiShape() = default;
 		uiShape(const uiShape&) = default;
+	};
+	struct sampleCube
+	{
+		int placeholder = 0;
+		sampleCube() = default;
+		sampleCube(const sampleCube&) = default;
 	};
 
 }

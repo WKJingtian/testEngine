@@ -111,9 +111,6 @@
     <ClInclude Include="..\..\tengine\include\input.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\include\layer\imguiLayer.h">
-      <Filter>tengine\include\layer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tengine\include\layer\layer.h">
       <Filter>tengine\include\layer</Filter>
     </ClInclude>

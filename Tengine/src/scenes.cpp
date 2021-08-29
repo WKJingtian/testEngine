@@ -192,44 +192,16 @@ namespace tengine
 		uint32_t* ibPtr = &(editorApp::getApp()->indexes[0]);
 		int counter = 0;
 
-		glm::vec4 p1 = { -0.5f, -0.5f, 0, 1 };
-		glm::vec4 p2 = { 0.5f, -0.5f, 0, 1 };
-		glm::vec4 p3 = { -0.5f, 0.5f, 0, 1 };
-		glm::vec4 p4 = { 0.5f, 0.5f, 0, 1 };
 		auto view4 = reg.view<spriteRenderComponent>();
 		for (auto e : view4)
 		{
 			//log("drawing sprite...", 0);
 			entity temp = entity(e, this);
 			spriteRenderComponent& comp = temp.getComponent<spriteRenderComponent>();
-			//if (!comp.tex || comp.tex->src != comp.texPath)
-			//	comp.tex = texture2D::create(comp.texPath.c_str());
-			//renderer2D::drawQuad(temp.transform(),
-			//	comp.color, comp.tex, comp.coord1, comp.coord2, comp.coord3, comp.coord4);
-			//PosColorVertex vbPtr[4];
-			//uint32_t ibPtr[6];
-			//bgfx::VertexLayout layout = bgfx::VertexLayout();
-			//layout
-			//	.begin()
-			//	.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
-			//	.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
-			//	.end();
-			//auto vbo = bgfx::createVertexBuffer(bgfx::makeRef(vbPtr, 4 * sizeof(PosColorVertex)), layout);
-			//auto ibo = bgfx::createIndexBuffer(bgfx::makeRef(ibPtr, 6 * sizeof(uint32_t)));
-			vbPtr[0] = { (temp.transform()*p1).x, (temp.transform()*p1).y, (temp.transform()*p1).z, colorConvert(comp.color) };
-			vbPtr[1] = { (temp.transform()*p2).x, (temp.transform()*p2).y, (temp.transform()*p2).z, colorConvert(comp.color) };
-			vbPtr[2] = { (temp.transform()*p3).x, (temp.transform()*p3).y, (temp.transform()*p3).z, colorConvert(comp.color) };
-			vbPtr[3] = { (temp.transform()*p4).x, (temp.transform()*p4).y, (temp.transform()*p4).z, colorConvert(comp.color) };
-			ibPtr[0] = 3 + counter; ibPtr[1] = 2 + counter; ibPtr[2] = 0 + counter;
-			ibPtr[3] = 1 + counter; ibPtr[4] = 3 + counter; ibPtr[5] = 0 + counter;
-			counter += 4;
-			vbPtr += 4;
-			ibPtr += 6;
-
-			//bgfx::setTransform(glm::value_ptr(temp.transform()));
-			//bgfx::setVertexBuffer(0, vbo);
-			//bgfx::setIndexBuffer(ibo);
-			//bgfx::submit(0, editorApp::getApp()->program);
+			bgfx::setTransform(&temp.transform());
+			bgfx::setVertexBuffer(0, comp.getQVBO());
+			bgfx::setIndexBuffer(comp.getQIBO());
+			bgfx::submit(0, editorApp::getApp()->program);
 		}
 
 		auto view5 = reg.view<meshComponent>();
@@ -329,9 +301,6 @@ namespace tengine
 					lightOn3.y * face.color.y,
 					lightOn3.z * face.color.z,
 					face.color.w);
-
-				//PosColorVertex vbPtr[3];
-				//uint32_t ibPtr[3];
 				vbPtr[0] = { p1.x, p1.y, p1.z, colorConvert(finalColor1) };
 				vbPtr[1] = { p2.x, p2.y, p2.z, colorConvert(finalColor2) };
 				vbPtr[2] = { p3.x, p3.y, p3.z, colorConvert(finalColor3) };
@@ -339,18 +308,6 @@ namespace tengine
 				counter += 3;
 				vbPtr += 3;
 				ibPtr += 3;
-
-				//bgfx::VertexLayout layout = bgfx::VertexLayout();
-				//layout
-				//	.begin()
-				//	.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
-				//	.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
-				//	.end();
-				//bgfx::setTransform(glm::value_ptr(temp.transform()));
-				//bgfx::setVertexBuffer(0, bgfx::createVertexBuffer(
-				//	bgfx::makeRef(vbPtr, 3), layout));
-				//bgfx::setIndexBuffer(bgfx::createIndexBuffer(bgfx::makeRef(ibPtr, 3)));
-				//bgfx::submit(0, editorApp::getApp()->program);
 			}
 		}
 
@@ -372,18 +329,43 @@ namespace tengine
 			counter += 3;
 			vbPtr += 3;
 			ibPtr += 3;
+		}
 
-			//bgfx::VertexLayout layout = bgfx::VertexLayout();
-			//layout
-			//	.begin()
-			//	.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
-			//	.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
-			//	.end();
-			//bgfx::setTransform(glm::value_ptr(temp.transform()));
-			//bgfx::setVertexBuffer(0, bgfx::createVertexBuffer(
-			//	bgfx::makeRef(vbPtr, 3), layout));
-			//bgfx::setIndexBuffer(bgfx::createIndexBuffer(bgfx::makeRef(ibPtr, 3)));
-			//bgfx::submit(0, editorApp::getApp()->program);
+		auto view7 = reg.view<sampleCube>();
+		for (auto e : view7)
+		{
+			entity temp = entity(e, this);
+			sampleCube& comp = temp.getComponent<sampleCube>();
+
+
+			static PosColorVertex CVBO[] =
+			{
+				{-1.0f,  1.0f,  1.0f, 0xff000000 },
+				{ 1.0f,  1.0f,  1.0f, 0xff0000ff },
+				{-1.0f, -1.0f,  1.0f, 0xff00ff00 },
+				{ 1.0f, -1.0f,  1.0f, 0xff00ffff },
+				{-1.0f,  1.0f, -1.0f, 0xffff0000 },
+				{ 1.0f,  1.0f, -1.0f, 0xffff00ff },
+				{-1.0f, -1.0f, -1.0f, 0xffffff00 },
+				{ 1.0f, -1.0f, -1.0f, 0xffffffff },
+			};
+			static const uint16_t CIBO[] = { 2, 1, 0, 2, 3, 1, 5, 6, 4, 7, 6, 5, 4, 2, 0, 6, 2, 4, 3, 5, 1, 3, 7, 5, 1, 4, 0, 1, 5, 4, 6, 3, 2, 7, 3, 6 };
+
+			static bgfx::VertexLayout layout = bgfx::VertexLayout();
+			layout
+				.begin()
+				.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+				.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+				.end();
+			static bgfx::VertexBufferHandle cvboHandle =
+				bgfx::createVertexBuffer(bgfx::makeRef(CVBO, sizeof(CVBO)), layout);
+			static bgfx::IndexBufferHandle ciboHandle =
+				bgfx::createIndexBuffer(bgfx::makeRef(CIBO, sizeof(CIBO)));
+
+			bgfx::setTransform(&temp.transform());
+			bgfx::setVertexBuffer(0, cvboHandle);
+			bgfx::setIndexBuffer(ciboHandle);
+			bgfx::submit(0, editorApp::getApp()->program);
 		}
 	}
 

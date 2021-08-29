@@ -160,6 +160,11 @@ namespace tengine
 			ImGui::OpenPopup("Add Component");
 		if (ImGui::BeginPopup("Add Component"))
 		{
+			if (ImGui::MenuItem("sample cube"))
+			{
+				selectedEntity.addComponent<sampleCube>();
+				ImGui::CloseCurrentPopup();
+			}
 			if (ImGui::MenuItem("camera"))
 			{
 				selectedEntity.addComponent<cameraComponent>();
@@ -239,6 +244,7 @@ namespace tengine
 			ImGui::DragFloat3("p1", glm::value_ptr(comp.p1));
 			ImGui::DragFloat3("p2", glm::value_ptr(comp.p2));
 			ImGui::DragFloat3("p3", glm::value_ptr(comp.p3));
+			if (opened) ImGui::TreePop();
 			if (componentDelete) e.removeComponent<uiShape>();
 		}
 		if (e.hasComponent<cameraComponent>())
@@ -444,6 +450,16 @@ namespace tengine
 				ImGui::TreePop();
 			}
 			if (componentDelete) e.removeComponent<spriteRenderComponent>();
+		}
+		if (e.hasComponent<sampleCube>())
+		{
+			auto& comp = e.getComponent<sampleCube>();
+			bool opened = ImGui::TreeNodeEx((void*)typeid(sampleCube).hash_code(), treeFlag, "sample cube");
+			bool componentDelete = false;
+			ImGui::SameLine();
+			if (ImGui::Button("remove component")) componentDelete = true;
+			if (opened) ImGui::TreePop();
+			if (componentDelete) e.removeComponent<sampleCube>();
 		}
 		if (e.hasComponent<nativeScriptComponent>())
 		{
