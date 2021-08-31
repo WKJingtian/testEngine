@@ -199,7 +199,6 @@
     <ClInclude Include="..\..\tengine\include\scene\sceneall.h" />
     <ClInclude Include="..\..\tengine\include\scene\serializer.h" />
     <ClInclude Include="..\..\tengine\include\scenePanel.h" />
-    <ClInclude Include="..\..\tengine\include\tengine_all.h" />
     <ClInclude Include="..\..\tengine\include\tengine_core.h" />
     <ClInclude Include="..\..\tengine\include\tpch.h" />
     <ClInclude Include="..\..\tengine\include\util\utilall.h" />
@@ -217,7 +216,6 @@
     <ClCompile Include="..\..\tengine\src\layers.cpp" />
     <ClCompile Include="..\..\tengine\src\scenePanel.cpp" />
     <ClCompile Include="..\..\tengine\src\scenes.cpp" />
-    <ClCompile Include="..\..\tengine\src\tengine.cpp" />
     <ClCompile Include="..\..\tengine\src\tpch.cpp" />
     <ClCompile Include="..\..\tengine\src\utils.cpp" />
   </ItemGroup>

@@ -108,9 +108,6 @@
     <ClInclude Include="..\..\tengine\include\scenePanel.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\include\tengine_all.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tengine\include\tengine_core.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
@@ -156,9 +153,6 @@
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\scenes.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\tengine.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\tpch.cpp">

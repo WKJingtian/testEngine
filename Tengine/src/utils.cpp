@@ -4,8 +4,6 @@
 
 namespace tengine
 {
-	using namespace std;
-
 	// log
 
 	void changeColor(int desiredColor)
