@@ -1,12 +1,10 @@
 #pragma once
 #include "tengine_core.h"
 #include "event/eventall.h"
-#include "graphic/graphicall.h"
+#include "camera.h"
 #include "layer/layerall.h"
 #include "util/utilall.h"
 
-#include "bgfxImgui.h"
-#include "sdlImgui.h"
 #include "bgfx/bgfx.h"
 #include "bgfx/platform.h"
 #include "bx/math.h"

@@ -2,9 +2,8 @@
 
 #include "util/utilall.h"
 #include "event/eventall.h"
-#include "graphic/graphicall.h"
+#include "camera.h"
 #include "layer/layerall.h"
-#include "shader/shaderall.h"
 #include "scene/sceneall.h"
 #include "application.h"
 #include "input.h"

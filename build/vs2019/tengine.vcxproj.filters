@@ -10,12 +10,6 @@
     <Filter Include="bin\x86\Debug">
       <UniqueIdentifier>{293123E7-95F1-9E1D-5E2C-E89ACAABE3F9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="bin\x86_64">
-      <UniqueIdentifier>{DC06FE4A-C8BE-3F98-31C6-18F41D9DDA88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="bin\x86_64\Debug">
-      <UniqueIdentifier>{52C6A088-3EBF-BFDA-67F1-A45F53499FE6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="tengine">
       <UniqueIdentifier>{0FFCBCD8-7BDB-3B74-84F3-C64AF051A2D5}</UniqueIdentifier>
     </Filter>
@@ -25,20 +19,11 @@
     <Filter Include="tengine\include\event">
       <UniqueIdentifier>{73ADF56B-DF19-B166-A80D-49C41439D3CE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tengine\include\graphic">
-      <UniqueIdentifier>{CF3E6FD0-3B76-B767-4480-1B8BB036DE60}</UniqueIdentifier>
-    </Filter>
     <Filter Include="tengine\include\layer">
       <UniqueIdentifier>{EE28696C-5A95-2467-2389-BCC48FB446CF}</UniqueIdentifier>
     </Filter>
     <Filter Include="tengine\include\scene">
       <UniqueIdentifier>{3F99E86C-AB05-A467-74F9-3BC5E024C6CF}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="tengine\include\shader">
-      <UniqueIdentifier>{08E0530A-F4D9-7C5C-DD46-136DC9DFE2C8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="tengine\include\shader\opengl">
-      <UniqueIdentifier>{9C4848F8-0861-2F22-D10D-BFBB3DE5C3BB}</UniqueIdentifier>
     </Filter>
     <Filter Include="tengine\include\util">
       <UniqueIdentifier>{2F476D7F-1BD6-F648-C4F4-0A44B06207EF}</UniqueIdentifier>
@@ -54,9 +39,6 @@
     <ClInclude Include="..\..\tengine\include\bgfxDraw.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\include\bgfxImgui.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tengine\include\bigg.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
@@ -67,6 +49,9 @@
       <Filter>tengine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\bigg_shaders.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\camera.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\editor2d.h">
@@ -92,21 +77,6 @@
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\event\mouseevent.h">
       <Filter>tengine\include\event</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\fs_ocornut_imgui.bin.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\graphic\camera.h">
-      <Filter>tengine\include\graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\graphic\graphicall.h">
-      <Filter>tengine\include\graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\imgui_impl_glfw.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\imgui_impl_opengl3.h">
-      <Filter>tengine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\input.h">
       <Filter>tengine\include</Filter>
@@ -138,21 +108,6 @@
     <ClInclude Include="..\..\tengine\include\scenePanel.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\include\sdlImgui.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\shader\opengl\openglShader.h">
-      <Filter>tengine\include\shader\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\shader\shader.h">
-      <Filter>tengine\include\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\shader\shaderLib.h">
-      <Filter>tengine\include\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\shader\shaderall.h">
-      <Filter>tengine\include\shader</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tengine\include\tengine_all.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
@@ -174,36 +129,21 @@
     <ClInclude Include="..\..\tengine\include\util\utiltimer.h">
       <Filter>tengine\include\util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\include\vs_ocornut_imgui.bin.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\tengine\src\application.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\tengine\src\bgfxImGui.cpp">
+    <ClCompile Include="..\..\tengine\src\bigg.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\tengine\src\bigg.cpp">
+    <ClCompile Include="..\..\tengine\src\camera.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\editor.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\editor2d.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\graphics.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\imguiBuild.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\imgui_impl_glfw.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\imgui_impl_opengl3.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\inputs.cpp">
@@ -216,12 +156,6 @@
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\scenes.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\sdlImgui.cpp">
-      <Filter>tengine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tengine\src\shaders.cpp">
       <Filter>tengine\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\tengine\src\tengine.cpp">
@@ -246,18 +180,6 @@
     </None>
     <None Include="bin\x86\Debug\tengine.lib">
       <Filter>bin\x86\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\bgfx.lib">
-      <Filter>bin\x86_64\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\bimg.lib">
-      <Filter>bin\x86_64\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\bx.lib">
-      <Filter>bin\x86_64\Debug</Filter>
-    </None>
-    <None Include="bin\x86_64\Debug\tengine.lib">
-      <Filter>bin\x86_64\Debug</Filter>
     </None>
   </ItemGroup>
 </Project>

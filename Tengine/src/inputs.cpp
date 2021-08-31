@@ -1,8 +1,7 @@
 #include "tpch.h"
 #include "input.h"
 #include "application.h"
-#include "graphic/graphicall.h"
-#include "sdlImgui.h"
+#include "camera.h"
 
 namespace tengine
 {
