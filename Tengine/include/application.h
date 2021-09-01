@@ -32,7 +32,7 @@ namespace tengine
 	}
 	class editorApp : public bigg::Application
 	{
-		static editorApp* editor;
+		static ownedPtr<editorApp> editor;
 
 		void initialize(int _argc, char** _argv);
 
@@ -56,7 +56,7 @@ namespace tengine
 
 		editorApp()
 			: bigg::Application("Editor") {}
-		static inline editorApp* getApp() { return editor; }
+		static inline editorApp* getApp() { return editor.get(); }
 		inline GLFWwindow* getWin() { return mWindow; }
 
 	};

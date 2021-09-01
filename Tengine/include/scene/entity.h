@@ -81,10 +81,10 @@ namespace tengine
 			}
 		}
 
-		operator bool() const { return sce != 0 && sce->isValid(*this); }
+		operator bool() { return sce != 0 && sce->isValid(*this); }
 		operator entt::entity() const { return ent; }
 		operator uint32_t() const { return (uint32_t)ent; }
-		bool operator ==(const entity& other) const
+		bool operator ==(entity& other)
 		{
 			return (uint32_t)ent == (uint32_t)other.ent && sce == other.sce;
 		}
@@ -186,7 +186,7 @@ namespace tengine
 		int maxParticle = 128;
 		int maxGenerationPerFrame = 1;
 		int particleCount = 0;
-		std::vector<entity*>particleList = std::vector<entity*>();
+		std::vector<std::shared_ptr<entity>>particleList = std::vector<std::shared_ptr<entity>>();
 		bool emitting = true;
 
 		particleSystem2D() = default;
@@ -227,7 +227,7 @@ namespace tengine
 			}
 			while (emitting && particleCount < maxParticle && alreadyMade < maxGenerationPerFrame)
 			{
-				entity* e = ent->getScene()->createEntity();
+				std::shared_ptr<entity> e = ent->getScene()->createEntity();
 				spriteRenderComponent& c1 = e->addComponent<spriteRenderComponent>();
 				particleComponent2D& c2 = e->addComponent<particleComponent2D>();
 				transformComponent& c3 = e->getComponent<transformComponent>();

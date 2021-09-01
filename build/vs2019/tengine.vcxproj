@@ -182,8 +182,6 @@
     <ClInclude Include="..\..\tengine\include\bigg_shaders.h" />
     <ClInclude Include="..\..\tengine\include\camera.h" />
     <ClInclude Include="..\..\tengine\include\editor2d.h" />
-    <ClInclude Include="..\..\tengine\include\editor_all.h" />
-    <ClInclude Include="..\..\tengine\include\editor_core.h" />
     <ClInclude Include="..\..\tengine\include\event\appevent.h" />
     <ClInclude Include="..\..\tengine\include\event\event.h" />
     <ClInclude Include="..\..\tengine\include\event\eventall.h" />
@@ -199,8 +197,10 @@
     <ClInclude Include="..\..\tengine\include\scene\sceneall.h" />
     <ClInclude Include="..\..\tengine\include\scene\serializer.h" />
     <ClInclude Include="..\..\tengine\include\scenePanel.h" />
+    <ClInclude Include="..\..\tengine\include\tengine_all.h" />
     <ClInclude Include="..\..\tengine\include\tengine_core.h" />
     <ClInclude Include="..\..\tengine\include\tpch.h" />
+    <ClInclude Include="..\..\tengine\include\util\ownedPtr.h" />
     <ClInclude Include="..\..\tengine\include\util\utilall.h" />
     <ClInclude Include="..\..\tengine\include\util\utilfile.h" />
     <ClInclude Include="..\..\tengine\include\util\utillog.h" />

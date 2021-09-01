@@ -98,9 +98,9 @@ namespace tengine
 	{
 
 	}
-	entity* scene::createEntity()
+	std::shared_ptr<entity> scene::createEntity()
 	{
-		entity* result = new entity{ reg.create(), this };
+		std::shared_ptr<entity> result = std::shared_ptr<entity>(new entity{ reg.create(), this });
 		result->setComponent<transformComponent>(transformComponent());
 		result->setComponent<tagComponent>(tagComponent()).ID = entity_id;
 		entity_id++;
@@ -108,8 +108,6 @@ namespace tengine
 	}
 	void scene::destroyEntity(entity e)
 	{
-		if (e.hasComponent<nativeScriptComponent>())
-			e.getComponent<nativeScriptComponent>().target->onDestroy();
 		reg.destroy((entt::entity)e);
 	}
 	void scene::destroyAll()
@@ -687,7 +685,7 @@ namespace tengine
 					log("invalid entity detected, skip...", 2);
 					continue;
 				}
-				entity* newEnt = target->createEntity();
+				std::shared_ptr<entity> newEnt = target->createEntity();
 				newEnt->getComponent<tagComponent>().tag = ent["tag component"]["tag"].as<std::string>();
 				newEnt->getComponent<tagComponent>().name = ent["tag component"]["name"].as<std::string>();
 				newEnt->getComponent<tagComponent>().ID = ent["tag component"]["ID"].as<uint32_t>();

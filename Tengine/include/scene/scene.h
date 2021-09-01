@@ -17,7 +17,7 @@ namespace tengine
 		~scene();
 		void onUpdate(float deltatime);
 		void resize(uint32_t x, uint32_t y);
-		entity* createEntity();
+		std::shared_ptr<entity> createEntity();
 		uint32_t IDconverter(uint32_t tagID);
 		void destroyEntity(entity e);
 		void destroyAll();

@@ -22,7 +22,7 @@ namespace tengine
 		virtual float getmyImpl() = 0;
 		virtual std::pair<float, float> getmPosImpl() = 0;
 	private:
-		static input* input_instance;
+		static ownedPtr<input> input_instance;
 	};
 
 	class winInput : public input

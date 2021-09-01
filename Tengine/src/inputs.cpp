@@ -5,7 +5,7 @@
 
 namespace tengine
 {
-	input* input::input_instance = new winInput();
+	ownedPtr<input> input::input_instance = ownedPtr<input>(new winInput());
 
 	bool winInput::isKeyPressedImpl(int keycode)
 	{

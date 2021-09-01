@@ -6,7 +6,7 @@ namespace tengine
 	class windowCloseEvent : public t_event
 	{
 	public:
-		windowCloseEvent() {}
+		windowCloseEvent() = default;
 		EVENT_CLASS_CATEGORY(ecApplication)
 		EVENT_CLASS_TYPE(windowClose)
 	};
@@ -18,7 +18,7 @@ namespace tengine
 			: width(w), height(h) {}
 		EVENT_CLASS_CATEGORY(ecApplication)
 		EVENT_CLASS_TYPE(windowResize)
-			std::string toString() const override
+		std::string toString() const override
 		{
 			std::stringstream ss;
 			ss << "windowResizeEvent: width->" << width << "; height->" << height;

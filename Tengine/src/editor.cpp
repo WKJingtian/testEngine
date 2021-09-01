@@ -1,4 +1,3 @@
-#include "editor_core.h"
 #include "tengine_all.h"
 
 #include <stdio.h>

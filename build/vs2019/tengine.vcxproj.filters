@@ -57,12 +57,6 @@
     <ClInclude Include="..\..\tengine\include\editor2d.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tengine\include\editor_all.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tengine\include\editor_core.h">
-      <Filter>tengine\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\tengine\include\event\appevent.h">
       <Filter>tengine\include\event</Filter>
     </ClInclude>
@@ -108,11 +102,17 @@
     <ClInclude Include="..\..\tengine\include\scenePanel.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\tengine\include\tengine_all.h">
+      <Filter>tengine\include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\tengine\include\tengine_core.h">
       <Filter>tengine\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\tpch.h">
       <Filter>tengine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\tengine\include\util\ownedPtr.h">
+      <Filter>tengine\include\util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tengine\include\util\utilall.h">
       <Filter>tengine\include\util</Filter>

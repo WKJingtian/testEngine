@@ -24,18 +24,18 @@ namespace tengine
 	layerStack::layerStack() { }
 	layerStack::~layerStack()
 	{
-		for (t_layer* l : lay) delete l;
+
 	}
-	void layerStack::pushLayer(t_layer* l)
+	void layerStack::pushLayer(ownedPtr<t_layer> l)
 	{
-		lay.emplace(lay.begin() + insert, l);
+		lay.emplace(lay.begin() + insert, std::move(l));
 		insert++;
 	}
-	void layerStack::pushOverlay(t_layer* l)
+	void layerStack::pushOverlay(ownedPtr<t_layer> l)
 	{
-		lay.emplace_back(l);
+		lay.emplace_back(std::move(l));
 	}
-	void layerStack::popLayer(t_layer* l)
+	void layerStack::popLayer(ownedPtr<t_layer> l)
 	{
 		auto it = std::find(lay.begin(), lay.end(), l);
 		if (it != lay.end())
@@ -44,7 +44,7 @@ namespace tengine
 			insert--;
 		}
 	}
-	void layerStack::popOverlay(t_layer* l)
+	void layerStack::popOverlay(ownedPtr<t_layer> l)
 	{
 		auto it = std::find(lay.begin(), lay.end(), l);
 		if (it != lay.end())

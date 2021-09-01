@@ -44,14 +44,14 @@ namespace tengine
 	scenePanel::scenePanel()
 		: selectedEntity(entity())
 	{
-		setContext(0);
+		setContext(weakPtr<scene>(0));
 	}
-	scenePanel::scenePanel(scene* sce)
+	scenePanel::scenePanel(weakPtr<scene> sce)
 		: selectedEntity(entity())
 	{
 		setContext(sce);
 	}
-	void scenePanel::setContext(scene* sce)
+	void scenePanel::setContext(weakPtr<scene> sce)
 	{
 		context = sce;
 	}
@@ -83,7 +83,7 @@ namespace tengine
 		ImGui::Checkbox("show insignificant entities", &showInsignificant);
 		auto view1 = context->getReg().view<transformComponent>();
 		for (auto& e : view1)
-			drawEntityUI(entity(e, context));
+			drawEntityUI(entity(e, context.get()));
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
 			selectedEntity = entity();
 		ImGui::End();
@@ -123,13 +123,13 @@ namespace tengine
 			ImGui::InputText("Path", savepath, 1024);
 			if (ImGui::Button("Save to path"))
 			{
-				serializer seri(context);
+				serializer seri(context.get());
 				seri.serialize(savepath);
 				saving = false;
 			}
 			if (ImGui::Button("save to autosave"))
 			{
-				serializer seri(context);
+				serializer seri(context.get());
 				seri.serialize(AUTOSAVE_PATH);
 				saving = false;
 			}
@@ -141,13 +141,13 @@ namespace tengine
 			ImGui::InputText("Path", loadpath, 1024);
 			if (ImGui::Button("Load from path"))
 			{
-				serializer seri(context);
+				serializer seri(context.get());
 				seri.deserialize(loadpath);
 				loading = false;
 			}
 			if (ImGui::Button("Load from autosave"))
 			{
-				serializer seri(context);
+				serializer seri(context.get());
 				seri.deserialize(AUTOSAVE_PATH);
 				loading = false;
 			}

@@ -21,7 +21,7 @@ namespace tengine
 	void editor2d::onAttach()
 	{
 		// entity system
-		activeScene = new scene();
+		activeScene = ownedPtr<scene>(new scene());
 		cameraEntity = activeScene->createEntity();
 		cameraEntity->addComponent<cameraComponent>();
 		cameraEntity->getComponent<cameraComponent>().setViewportSize(1280, 720);

@@ -4,11 +4,11 @@
 
 namespace tengine
 {
-	editorApp* editorApp::editor = 0;
+	ownedPtr<editorApp> editorApp::editor = ownedPtr<editorApp>(nullptr);
 
 	void editorApp::initialize(int _argc, char** _argv)
 	{
-		if (editor == nullptr) editor = this;
+		if (editor.get() == nullptr) editor = ownedPtr<editorApp>(this);
 		else errout("multiple editor instance created");
 		running = true;
 		pushLayer(new editor2d());
@@ -49,8 +49,8 @@ namespace tengine
 		bgfxIndexBuffer = bgfx::createIndexBuffer(bgfx::makeRef(indexes, 4096 * sizeof(uint32_t)));
 
 		bgfx::touch(0);
-		for (t_layer* l : ls) l->onUpdate(dt);
-		for (t_layer* l : ls) l->guiRender();
+		for (weakPtr<t_layer> l : ls) l.get()->onUpdate(dt);
+		for (weakPtr<t_layer> l : ls) l.get()->guiRender();
 
 		static glm::mat4 originP = glm::mat4(1);
 		bgfx::setTransform(&originP);
@@ -61,7 +61,7 @@ namespace tengine
 
 	void editorApp::pushLayer(t_layer* l)
 	{
-		ls.pushLayer(l);
+		ls.pushLayer(ownedPtr<t_layer>(l));
 		l->onAttach();
 	}
 }

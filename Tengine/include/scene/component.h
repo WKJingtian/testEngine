@@ -174,8 +174,10 @@ namespace tengine
 		template <typename T>
 		void bind()
 		{
-			instantiate = []() { return static_cast<scriptableEntity*>(new T()); };
-			kill = [](nativeScriptComponent* comp) {delete comp->target; comp->target = 0; };
+			instantiate = []()
+			{ return static_cast<scriptableEntity*>(new T()); };
+			kill = [](nativeScriptComponent* comp)
+			{ delete comp->target;  comp->target = 0; };
 		}
 	};
 

@@ -8,15 +8,15 @@ namespace tengine
 	{
 	public:
 		scenePanel();
-		scenePanel(scene* sce);
-		void setContext(scene* sce);
+		scenePanel(weakPtr<scene> sce);
+		void setContext(weakPtr<scene> sce);
 		void onImguiRender();
 
 	private:
 		bool showInsignificant = false;
 		void drawEntityUI(entity e);
 		void drawComponentUI(entity e);
-		scene* context = 0;
+		weakPtr<scene> context = weakPtr<scene>(0);
 		entity selectedEntity;
 		bool loading = false;
 		bool saving = false;

@@ -1,8 +1,6 @@
 #pragma once
 #include "scene.h"
 
-
-
 namespace tengine
 {
 	class serializer
